@@ -97,6 +97,7 @@
 			<artifactId>thymeleaf-layout-dialect</artifactId>
 		</dependency>
 	</dependencies>
+
 	<!-- Empacotar como uma jar executavel -->
 	<build>
 		<plugins>
