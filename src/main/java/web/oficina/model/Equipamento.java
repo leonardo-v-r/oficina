@@ -1,12 +1,32 @@
 package web.oficina.model;
 
-public class Equipamento {
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
+
+@Entity
+@Table(name="equipamento")
+@DynamicUpdate
+public class Equipamento {
+	
+	private static final long serialVersionUID = 6462379392589216109L;
+	
+	@Id
+	@SequenceGenerator(name="gerador", sequenceName="equipamento_codigo_seq", allocationSize=1)
+	@GeneratedValue(generator="gerador", strategy = GenerationType.SEQUENCE)
     private Long codigo;
     private String nome;
     private String marca;
-    private StatusEquipamento status;
-
+	@Enumerated(EnumType.STRING)
+    private StatusEquipamento status = StatusEquipamento.DISPONIVEL;
+    
     public Long getCodigo() {
         return codigo;
     }

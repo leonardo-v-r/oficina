@@ -11,8 +11,6 @@
 					</li>					<li class="my-2">
 						<hr class="dropdown-toggle-split" />
 					</li>
-
-
 					<!-- 1o elemento -->
 					<li>
 						<a class="nav-link px-3 sidebar-link text-white" data-bs-toggle="collapse" href="#aplicacoes">
@@ -27,7 +25,7 @@
 						<div class="collapse" id="aplicacoes" th:classappend=" ${#strings.startsWith(#request.requestURI, '/aplicacoes')} ? show">
 							<ul class="navbar-nav ps-3">
 								<li>
-									<a th:href="@{/aplicacoes/cadastrar}" class="nav-link px-3">
+									<a th:href="@{/equipamento/abrircadastrar}" class="nav-link px-3">
 										<span class="me-2">
 											<i class="bi bi-plus-square text-white"></i>
 										</span>
@@ -35,7 +33,7 @@
 									</a>
 								</li>
 								<li>
-									<a th:href="@{/aplicacoes/abrirpesquisar}" class="nav-link px-3">
+									<a th:href="@{/equipamento/abrirpesquisar}" class="nav-link px-3">
 										<span class="me-2">
 											<i class="bi bi-search text-white"></i>
 										</span>
