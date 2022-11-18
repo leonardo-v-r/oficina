@@ -1,11 +1,44 @@
 package web.oficina.model;
 
-public class Usuario {
+import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+@Entity
+@Table(name = "usuario")
+public class Usuario implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @SequenceGenerator(name = "usuario_seq_gen", sequenceName = "usuario_codigo_seq", allocationSize = 1)
+    @GeneratedValue(generator = "usuario_seq_gen", strategy = GenerationType.SEQUENCE)
+    @Column(name = "codigo")
     private Long codigo;
+
+    @NotBlank(message = "Nome é obrigatório")
+    @Column(name = "nome")
     private String nome;
+
+    @NotBlank(message = "Login é obrigatório")
+    @Column(name = "login")
+    private String login;
+
+    @NotBlank(message = "Senha é obrigatória")
+    @Column(name = "senha")
     private String senha;
-    private String admin;
+
+    @NotNull(message = "Esse campo é obrigatório")
+    @Column(name = "admin")
+    private boolean isAdmin = false;
 
     public Long getCodigo() {
         return codigo;
@@ -16,17 +49,23 @@ public class Usuario {
     public void setNome(String nome) {
         this.nome = nome;
     }
+    public String getLogin() {
+        return login;
+    }
+    public void setLogin(String login) {
+        this.login = login;
+    }
     public String getSenha() {
         return senha;
     }
     public void setSenha(String senha) {
         this.senha = senha;
     }
-    public String getAdmin() {
-        return admin;
+    public Boolean getAdmin() {
+        return isAdmin;
     }
-    public void setAdmin(String admin) {
-        this.admin = admin;
+    public void setAdmin(Boolean admin) {
+        this.isAdmin = admin;
     }
 
     @Override
@@ -56,6 +95,6 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario [codigo=" + codigo + ", nome=" + nome + ", senha=" + senha + ", admin=" + admin + "]";
+        return "Usuario [codigo=" + codigo + ", nome=" + nome + ", senha=" + senha + ", admin=" + isAdmin + "]";
     }  
 }
