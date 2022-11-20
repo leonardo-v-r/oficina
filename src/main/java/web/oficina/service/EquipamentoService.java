@@ -17,4 +17,9 @@ public class EquipamentoService {
 	public void salvar(Equipamento equipamento) {
 		equipamentoRepository.save(equipamento);
 	}
+	
+	@Transactional
+	public void alterar(Equipamento equipamento) {
+		equipamentoRepository.save(equipamento);
+	}
 }

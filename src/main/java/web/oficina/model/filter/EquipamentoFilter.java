@@ -11,7 +11,12 @@ public class EquipamentoFilter {
     public Long getCodigo() {
         return codigo;
     }
-    public String getNome() {
+    
+    public void setCodigo(Long codigo) {
+		this.codigo = codigo;
+	}
+
+	public String getNome() {
         return nome;
     }
     public void setNome(String nome) {

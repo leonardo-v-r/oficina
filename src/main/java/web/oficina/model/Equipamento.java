@@ -1,5 +1,7 @@
 package web.oficina.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -14,7 +16,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @Entity
 @Table(name="equipamento")
 @DynamicUpdate
-public class Equipamento {
+public class Equipamento implements Serializable {
 	
 	private static final long serialVersionUID = 6462379392589216109L;
 	
@@ -33,7 +35,10 @@ public class Equipamento {
     public String getNome() {
         return nome;
     }
-    public void setNome(String nome) {
+    public void setCodigo(Long codigo) {
+		this.codigo = codigo;
+	}
+	public void setNome(String nome) {
         this.nome = nome;
     }
     public String getMarca() {

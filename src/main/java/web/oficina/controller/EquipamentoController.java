@@ -30,7 +30,7 @@ public class EquipamentoController {
 
 	@Autowired
 	private EquipamentoRepository equipamentoRepository;
-	
+
 	@Autowired
 	private EquipamentoService equipamentoService;
 
@@ -38,7 +38,7 @@ public class EquipamentoController {
 	public String abrirPesquisa() {
 		return "equipamento/pesquisar";
 	}
-	
+
 	@GetMapping("/pesquisar")
 	public String pesquisar(EquipamentoFilter filtro, Model model,
 			@PageableDefault(size = 10) @SortDefault(sort = "codigo", direction = Sort.Direction.ASC) Pageable pageable,
@@ -60,9 +60,28 @@ public class EquipamentoController {
 		equipamentoService.salvar(equipamento);
 		return "redirect:/equipamento/cadastro/sucesso";
 	}
-	
+
 	@GetMapping("/cadastro/sucesso")
 	public String mostrarMensagemCadastroSucesso(Model model) {
+		model.addAttribute("mensagem", "Cadastro de equipamento efetuado com sucesso.");
+		return "index";
+	}
+
+	@PostMapping("/abriralterar")
+	public String abrirAlterar(Equipamento equipamento) {
+		System.out.println(equipamento);
+		return "equipamento/alterar";
+	}
+
+	@PostMapping("/alterar")
+	public String alterar(Equipamento equipamento) {
+		equipamentoService.alterar(equipamento);
+		return "redirect:/equipamento/alterar/sucesso";
+
+	}
+	
+	@GetMapping("/alterar/sucesso")
+	public String mostrarMensagemAlterarSucesso(Model model) {
 		model.addAttribute("mensagem", "Cadastro de equipamento efetuado com sucesso.");
 		return "index";
 	}
