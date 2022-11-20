@@ -66,4 +66,9 @@ public class EquipamentoController {
 		model.addAttribute("mensagem", "Cadastro de equipamento efetuado com sucesso.");
 		return "index";
 	}
+	
+	@PostMapping("/abriralterar")
+	public String abrirAlterar(Equipamento equipamento) {
+		return "equipamento/alterar";
+	}
 }

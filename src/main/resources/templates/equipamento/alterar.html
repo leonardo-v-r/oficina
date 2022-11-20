@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>Pesquisar Equipamento</title>
+<title>Alterar Equipamento</title>
 </head>
 <body>
 	<div layout:fragment="conteudo">
@@ -11,21 +11,24 @@
 
 		<!-- conteudo principal -->
 		<main class="mt-5 p-4 pt-5">
-			<h2>Pesquisar equipamento</h2>
-			<form th:action="@{/equipamento/pesquisar}" method="get">
+			<h2>Alterar</h2>
+			<form th:action="@{/equipamento/alterar}" method="post" th:object="${equipamento}">
 				<div class="mb-3">
-					<label for="codigo" class="form-label">Código</label>
-					<input type="text" name="codigo" id="codigo" class="form-control" placeholder="Digite o código do equipamento">
+					<label for="nome" class="form-label">
+						Código:
+						<span th:text="*{codigo}"></span>
+					</label>
 				</div>
+				<input type="hidden" name="codigo" th:value="*{codigo}">
 				<div class="mb-3">
 					<label for="nome" class="form-label">Nome</label>
-					<input type="text" name="nome" id="nome" class="form-control" placeholder="Digite o nome do equipamento">
+					<input type="text" class="form-control" th:field="*{nome}" placeholder="Digite o nome da vacina">
 				</div>
 				<div class="mb-3">
 					<label for="marca" class="form-label">Marca</label>
-					<input type="text" name="marca" id="marca" class="form-control" placeholder="Digite o nome da marca">
+					<input class="form-control" th:field="*{marca}" placeholder="Digite a descrição da vacina"></input>
 				</div>
-				<button type="submit" class="btn btn-primary">Pesquisar</button>
+				<button type="submit" class="btn btn-primary">Alterar</button>
 			</form>
 		</main>
 	</div>
