@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastar</title>
+</head>
+<body>
+    <form th:action="@{/usuario/novo}" method="post" th:object="${usuario}">
+        <div>
+            <label for="nome">Nome</label>
+            <input type="text" th:field="*{nome}" placeholder="Digite o nome do usuario">
+        </div>
+        <div>
+            <label for="login">Login</label>
+            <input type="text" th:field="*{login}" placeholder="Digite o login do usuario">
+        </div>
+        <div>
+            <label for="senha">Senha</label>
+            <input type="text" th:field="*{senha}" placeholder="Digite a senha do usuário">
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Cadastrar</button>
+    </form>
+
+</body>
+</html>
