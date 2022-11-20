@@ -13,7 +13,7 @@
 					</li>
 					<!-- 1o elemento -->
 					<li>
-						<a class="nav-link px-3 sidebar-link text-white" data-bs-toggle="collapse" href="#aplicacoes">
+						<a class="nav-link px-3 sidebar-link text-white" data-bs-toggle="collapse" href="#equipamentos">
 							<span>Equipamentos</span>
 							<span class="ms-auto">
 								<span class="right-icon">
@@ -22,10 +22,10 @@
 							</span>
 						</a>   
 						
-						<div class="collapse" id="aplicacoes" th:classappend=" ${#strings.startsWith(#request.requestURI, '/aplicacoes')} ? show">
+						<div class="collapse" id="equipamentos" th:classappend=" ${#strings.startsWith(#request.requestURI, '/equipamentos')} ? show">
 							<ul class="navbar-nav ps-3">
 								<li>
-									<a th:href="@{/equipamento/abrircadastrar}" class="nav-link px-3">
+									<a th:href="@{/usuario/abrircadastrar}" class="nav-link px-3">
 										<span class="me-2">
 											<i class="bi bi-plus-square text-white"></i>
 										</span>
@@ -42,6 +42,39 @@
 								</li>
 							</ul>
 						</div>
+						
+					</li>
+					<li>
+						<a class="nav-link px-3 sidebar-link text-white" data-bs-toggle="collapse" href="#usuarios">
+							<span>Usuários</span>
+							<span class="ms-auto">
+								<span class="right-icon">
+									<i class="bi bi-chevron-down"></i>
+								</span>
+							</span>
+						</a>   
+						
+						<div class="collapse" id="usuarios" th:classappend=" ${#strings.startsWith(#request.requestURI, '/usuarios')} ? show">
+							<ul class="navbar-nav ps-3">
+								<li>
+									<a th:href="@{/usuario/abrircadastrar}" class="nav-link px-3">
+										<span class="me-2">
+											<i class="bi bi-plus-square text-white"></i>
+										</span>
+										<span class="text-white">Cadastrar</span>
+									</a>
+								</li>
+								<li>
+									<a th:href="@{/usuario/abrirpesquisar}" class="nav-link px-3">
+										<span class="me-2">
+											<i class="bi bi-search text-white"></i>
+										</span>
+										<span class="text-white">Pesquisar</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						
 					</li>
 				</ul>
 			</nav>

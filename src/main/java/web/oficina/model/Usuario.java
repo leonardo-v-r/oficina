@@ -13,6 +13,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "usuario")
@@ -30,6 +31,7 @@ public class Usuario implements Serializable {
     @Column(name = "nome")
     private String nome;
 
+	@Pattern(regexp="^[a-z0-9]*$", message = "Login deve conter apenas letras minúsculas e números")
     @NotBlank(message = "Login é obrigatório")
     @Column(name = "login")
     private String login;

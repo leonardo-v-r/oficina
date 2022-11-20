@@ -5,5 +5,6 @@ CREATE TABLE public.usuario
     admin boolean,
     login text,
     senha text,
+    status text,
     PRIMARY KEY (codigo)
 );
