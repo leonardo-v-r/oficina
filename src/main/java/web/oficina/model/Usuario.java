@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,7 +26,7 @@ public class Usuario implements Serializable {
     @Column(name = "codigo")
     private Long codigo;
 
-    @NotBlank(message = "Nome é obrigatório")
+	@NotBlank(message = "Nome é obrigatório")
     @Column(name = "nome")
     private String nome;
 
@@ -38,7 +40,27 @@ public class Usuario implements Serializable {
 
     @NotNull(message = "Esse campo é obrigatório")
     @Column(name = "admin")
-    private boolean isAdmin = false;
+    private boolean admin = false;
+    
+	@Enumerated(EnumType.STRING)
+    private StatusUsuario status = StatusUsuario.ATIVO;
+    
+    public StatusUsuario getStatus() {
+        return status;
+    }
+    public void setStatus(StatusUsuario status) {
+        this.status = status;
+    }
+
+    public boolean isAdmin() {
+		return admin;
+	}
+	public void setAdmin(boolean isAdmin) {
+		this.admin = isAdmin;
+	}
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
+	}
 
     public Long getCodigo() {
         return codigo;
@@ -62,10 +84,10 @@ public class Usuario implements Serializable {
         this.senha = senha;
     }
     public Boolean getAdmin() {
-        return isAdmin;
+        return admin;
     }
     public void setAdmin(Boolean admin) {
-        this.isAdmin = admin;
+        this.admin = admin;
     }
 
     @Override
@@ -94,7 +116,8 @@ public class Usuario implements Serializable {
     }
 
     @Override
-    public String toString() {
-        return "Usuario [codigo=" + codigo + ", nome=" + nome + ", senha=" + senha + ", admin=" + isAdmin + "]";
-    }  
+	public String toString() {
+		return "Usuario [codigo=" + codigo + ", nome=" + nome + ", login=" + login + ", senha=" + senha + ", admin="
+				+ admin + ", status=" + status + "]";
+	}  
 }
