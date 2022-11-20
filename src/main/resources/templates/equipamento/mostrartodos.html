@@ -38,11 +38,12 @@
 							</form>
 						</td>
 						<td>
-							<form th:action="@{/vacinas/abrirremover}" method="post">
+							<form th:action="@{/equipamento/remover}" method="post">
+								<input type="hidden" th:value="'Você tem certeza que quer remover o equipamento ' + ${e.nome} + ' - ' + ${e.marca}+'?'" class="mensagem">
 								<input type="hidden" name="codigo" th:value="${e.codigo}">
 								<input type="hidden" name="nome" th:value="${e.nome}">
 								<input type="hidden" name="marca" th:value="${e.marca}">
-								<button style="background-color: red;" type="submit" title="Remover" class="btn btn-secondary">
+								<button style="background-color: red;" type="submit" title="Remover" class="btn btn-secondary confirmacao">
 									<span>REMOVER</span>
 									<i class="bi bi-trash-fill"> </i>
 								</button>

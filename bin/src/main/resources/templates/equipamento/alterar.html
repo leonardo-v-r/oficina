@@ -22,13 +22,11 @@
 				<input type="hidden" name="codigo" th:value="*{codigo}">
 				<div class="mb-3">
 					<label for="nome" class="form-label">Nome</label>
-					<input type="text" class="form-control" th:field="*{nome}" placeholder="Digite o nome do equipamento" th:errorclass="is-invalid">
-					<span class="invalid-feedback" th:if="${#fields.hasErrors('nome')}" th:each="erro : ${#fields.errors('nome')}" th:text="${erro} + '. '"></span>
+					<input type="text" class="form-control" th:field="*{nome}" placeholder="Digite o nome da vacina">
 				</div>
 				<div class="mb-3">
 					<label for="marca" class="form-label">Marca</label>
-					<input class="form-control" th:field="*{marca}" placeholder="Digite a marca da vacina" th:errorclass="is-invalid">
-					<span class="invalid-feedback" th:if="${#fields.hasErrors('marca')}" th:each="erro : ${#fields.errors('marca')}" th:text="${erro} + '. '"></span>
+					<input class="form-control" th:field="*{marca}" placeholder="Digite a descrição da vacina"></input>
 				</div>
 				<button type="submit" class="btn btn-primary">Alterar</button>
 			</form>

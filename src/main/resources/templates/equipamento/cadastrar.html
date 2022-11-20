@@ -15,14 +15,22 @@
 			<form th:action="@{/equipamento/cadastrar}" method="post" th:object="${equipamento}">
 				<div class="mb-3">
 					<label for="nome" class="form-label">Nome</label>
-					<input type="text" class="form-control" th:field="*{nome}"  placeholder="Digite o nome do equipamento">
+					<input type="text" class="form-control" th:field="*{nome}" placeholder="Digite o nome do equipamento" th:errorclass="is-invalid">
+					<span class="invalid-feedback" th:if="${#fields.hasErrors('nome')}" th:each="erro : ${#fields.errors('nome')}" th:text="${erro} + '. '"></span>
 				</div>
 				<div class="mb-3">
 					<label for="marca" class="form-label">Marca</label>
-					<input type="text" class="form-control" th:field="*{marca}" placeholder="Digite o nome da marca">
+					<input type="text" class="form-control" th:field="*{marca}" placeholder="Digite o nome da marca" th:errorclass="is-invalid">
+					<span class="invalid-feedback" th:if="${#fields.hasErrors('marca')}" th:each="erro : ${#fields.errors('marca')}" th:text="${erro} + '. '"></span>
 				</div>
 				<button type="submit" class="btn btn-primary">Cadastrar</button>
 			</form>
+			
+			<div th:if="${notificacao != null}" th:object="${notificacao}">
+				<input type="hidden" id="mensagem" th:value="*{mensagem}">
+				<input type="hidden" id="tipo" th:value="*{tipo}">
+				<input type="hidden" id="intervalo" th:value="*{intervalo}">
+			</div>
 		</main>
 	</div>
 </body>

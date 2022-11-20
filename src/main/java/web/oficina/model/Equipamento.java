@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -24,7 +25,9 @@ public class Equipamento implements Serializable {
 	@SequenceGenerator(name="gerador", sequenceName="equipamento_codigo_seq", allocationSize=1)
 	@GeneratedValue(generator="gerador", strategy = GenerationType.SEQUENCE)
     private Long codigo;
+	@NotBlank(message = "O nome é obrigatório")
     private String nome;
+	@NotBlank(message = "A marca é obrigatória")
     private String marca;
 	@Enumerated(EnumType.STRING)
     private StatusEquipamento status = StatusEquipamento.DISPONIVEL;

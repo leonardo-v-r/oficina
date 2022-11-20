@@ -2,7 +2,7 @@ package web.oficina.model;
 
 public enum StatusEquipamento {
 
-    EM_MANUTENCAO("Em manutenção"),
+    MANUTENCAO("Em manutenção"),
     EXCLUIDO("Excluído"),
     DISPONIVEL("Disponível");
 
