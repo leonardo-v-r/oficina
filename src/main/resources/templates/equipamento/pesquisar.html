@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>Cadastrar Equipamento</title>
+<title>Pesquisar Equipamento</title>
 </head>
 <body>
 	<div layout:fragment="conteudo">
@@ -11,17 +11,17 @@
 
 		<!-- conteudo principal -->
 		<main class="mt-5 p-4 pt-5">
-			<h2>Cadastrar equipamento</h2>
-			<form th:action="@{/equipamento/cadastrar}" method="post" th:object="${equipamento}">
+			<h2>Pesquisar equipamento</h2>
+			<form th:action="@{/equipamento/pesquisar}" method="get">
 				<div class="mb-3">
 					<label for="nome" class="form-label">Nome</label>
-					<input type="text" class="form-control" th:field="*{nome}"  placeholder="Digite o nome do equipamento">
+					<input type="text" class="form-control" placeholder="Digite o nome do equipamento">
 				</div>
 				<div class="mb-3">
 					<label for="marca" class="form-label">Marca</label>
-					<input type="text" class="form-control" th:field="*{marca}" placeholder="Digite o nome da marca">
+					<input type="text" class="form-control" placeholder="Digite o nome da marca">
 				</div>
-				<button type="submit" class="btn btn-primary">Cadastrar</button>
+				<button type="submit" class="btn btn-primary">Pesquisar</button>
 			</form>
 		</main>
 	</div>
