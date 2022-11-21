@@ -20,13 +20,18 @@
 				<input type="hidden" name="codigo" th:value="*{codigo}">
 				<div class="mb-3">
 					<label for="nome" class="form-label">Nome</label>
-					<input type="text" class="form-control" th:field="*{nome}" placeholder="Digite o novo nome do usuario" th:errorclass="is-invalid">
+					<input type="text" class="form-control" th:field="*{nome}" placeholder="Digite o novo nome" th:errorclass="is-invalid">
 					<span class="invalid-feedback" th:if="${#fields.hasErrors('nome')}" th:each="erro : ${#fields.errors('nome')}" th:text="${erro} + '. '"></span>
 				</div>
 				<div class="mb-3">
 					<label for="login" class="form-label">Login</label>
-					<input type="text" class="form-control" th:field="*{login}" placeholder="Digite o novo login do usuario" th:errorclass="is-invalid">
+					<input type="text" class="form-control" th:field="*{login}" placeholder="Digite o novo login" th:errorclass="is-invalid">
 					<span class="invalid-feedback" th:if="${#fields.hasErrors('login')}" th:each="erro : ${#fields.errors('login')}" th:text="${erro} + '. '"></span>
+				</div>
+				<div class="mb-3">
+					<label for="senha" class="form-label">Senha</label>
+					<input type="text" class="form-control" th:field="*{senha}" placeholder="Digite a nova senha" th:errorclass="is-invalid">
+					<span class="invalid-feedback" th:if="${#fields.hasErrors('senha')}" th:each="erro : ${#fields.errors('senha')}" th:text="${erro} + '. '"></span>
 				</div>
 				<div class="mb-3">
 					<input type="checkbox" id="admin1" name="admin" th:field="*{admin}">
@@ -35,6 +40,11 @@
 				</div>
 				<button type="submit" class="btn btn-primary">Alterar</button>
 			</form>
+			<div th:if="${notificacao != null}" th:object="${notificacao}">
+				<input type="hidden" id="mensagem" th:value="*{mensagem}">
+				<input type="hidden" id="tipo" th:value="*{tipo}">
+				<input type="hidden" id="intervalo" th:value="*{intervalo}">
+			</div>
 		</main>
 	</div>
 </body>

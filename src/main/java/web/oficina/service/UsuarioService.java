@@ -16,5 +16,10 @@ public class UsuarioService {
 	@Transactional
     public void salvar(Usuario usuario) {
         usuarioRepository.save(usuario);
-    }    
+    }   
+	
+	@Transactional
+	public void alterar(Usuario usuario) {
+		usuarioRepository.save(usuario);
+	}
 }
