@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import web.oficina.ajax.NotificacaoAlertify;
 import web.oficina.ajax.TipoNotificaoAlertify;
 import web.oficina.model.Equipamento;
+import web.oficina.model.StatusEquipamento;
+import web.oficina.model.StatusUsuario;
 import web.oficina.model.Usuario;
 import web.oficina.model.filter.UsuarioFilter;
 import web.oficina.pagination.PageWrapper;
@@ -139,6 +141,21 @@ public class UsuarioController {
 	public String mostrarMensagemAlterarFalha(Usuario usuario, Model model) {
 		NotificacaoAlertify notificacao = new NotificacaoAlertify("Login já está sendo utilizado",
 				TipoNotificaoAlertify.ERRO);
+		model.addAttribute("notificacao", notificacao);
+		return "usuario/pesquisar";
+	}
+	
+	@PostMapping("/remover")
+	public String remover(Usuario usuario) {
+		usuario.setStatus(StatusUsuario.EXCLUIDO);
+		usuarioService.alterar(usuario);
+		return "redirect:/usuario/remover/sucesso";
+	}
+
+	@GetMapping("/remover/sucesso")
+	public String mostrarMensagemRemoverSucesso(Model model) {
+		NotificacaoAlertify notificacao = new NotificacaoAlertify("Remoção efetuada com sucesso.",
+				TipoNotificaoAlertify.SUCESSO);
 		model.addAttribute("notificacao", notificacao);
 		return "usuario/pesquisar";
 	}
