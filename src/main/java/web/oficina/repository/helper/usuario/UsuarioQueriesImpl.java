@@ -21,7 +21,7 @@ import web.oficina.model.StatusUsuario;
 import web.oficina.model.filter.UsuarioFilter;
 import web.oficina.repository.pagination.PaginacaoUtil;
 
-public class UsuariosQueriesImpl implements UsuarioQueries {
+public class UsuarioQueriesImpl implements UsuarioQueries {
 
 	@PersistenceContext
 	private EntityManager manager;
