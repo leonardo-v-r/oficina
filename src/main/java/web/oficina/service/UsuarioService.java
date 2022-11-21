@@ -2,6 +2,7 @@ package web.oficina.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import web.oficina.model.Usuario;
 import web.oficina.repository.UsuarioRepository;
@@ -12,7 +13,8 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public Usuario salvar(Usuario usuario) {
-        return usuarioRepository.save(usuario);
+	@Transactional
+    public void salvar(Usuario usuario) {
+        usuarioRepository.save(usuario);
     }    
 }
