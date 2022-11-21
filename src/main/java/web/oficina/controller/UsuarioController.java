@@ -2,11 +2,17 @@ package web.oficina.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.SortDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +25,8 @@ import web.oficina.ajax.NotificacaoAlertify;
 import web.oficina.ajax.TipoNotificaoAlertify;
 import web.oficina.model.Equipamento;
 import web.oficina.model.Usuario;
+import web.oficina.model.filter.UsuarioFilter;
+import web.oficina.pagination.PageWrapper;
 import web.oficina.repository.UsuarioRepository;
 import web.oficina.service.UsuarioService;
 
@@ -74,6 +82,28 @@ public class UsuarioController {
 				TipoNotificaoAlertify.ERRO);
 		model.addAttribute("notificacao", notificacao);
 		return "usuario/cadastrar";
+	}
+	
+	@GetMapping("/abrirpesquisar")
+	public String abrirPesquisa(Usuario usuario) {
+		return "usuario/pesquisar";
+	}
+	
+	@GetMapping("/pesquisar")
+	public String pesquisar(UsuarioFilter filtro, Model model,
+			@PageableDefault(size = 10) @SortDefault(sort = "codigo", direction = Sort.Direction.ASC) Pageable pageable,
+			HttpServletRequest request) {
+
+		Page<Usuario> pagina = usuarioRepository.pesquisar(filtro, pageable);
+		PageWrapper<Usuario> paginaWrapper = new PageWrapper<>(pagina, request);
+		model.addAttribute("pagina", paginaWrapper);
+		return "usuario/mostrartodos";
+	}
+	
+	@PostMapping("/abriralterar")
+	public String abrirAlterar(Usuario usuario) {
+		System.out.println(usuario);
+		return "usuario/alterar";
 	}
 
 }
