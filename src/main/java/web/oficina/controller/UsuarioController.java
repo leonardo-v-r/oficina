@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import web.oficina.ajax.NotificacaoAlertify;
 import web.oficina.ajax.TipoNotificaoAlertify;
+import web.oficina.model.Equipamento;
 import web.oficina.model.Usuario;
 import web.oficina.model.filter.UsuarioFilter;
 import web.oficina.pagination.PageWrapper;
@@ -97,6 +98,12 @@ public class UsuarioController {
 		PageWrapper<Usuario> paginaWrapper = new PageWrapper<>(pagina, request);
 		model.addAttribute("pagina", paginaWrapper);
 		return "usuario/mostrartodos";
+	}
+	
+	@PostMapping("/abriralterar")
+	public String abrirAlterar(Usuario usuario) {
+		System.out.println(usuario);
+		return "usuario/alterar";
 	}
 
 }
