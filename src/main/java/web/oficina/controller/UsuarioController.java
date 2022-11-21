@@ -50,7 +50,7 @@ public class UsuarioController {
 	@PostMapping("/cadastrar")
 	public String cadastrar(@Valid Usuario usuario, BindingResult resultado) {
 		if (resultado.hasErrors()) {
-			logger.info("O usuário recabido para cadastrar não é válido.");
+			logger.info("O usuário recebido para cadastrar não é válido.");
 			logger.info("Erros encontrados:");
 			for (FieldError erro : resultado.getFieldErrors()) {
 				logger.info("{}", erro);
@@ -104,6 +104,43 @@ public class UsuarioController {
 	public String abrirAlterar(Usuario usuario) {
 		System.out.println(usuario);
 		return "usuario/alterar";
+	}
+	
+	@PostMapping("/alterar")
+	public String alterar(@Valid Usuario usuario, BindingResult resultado) {
+		if (resultado.hasErrors()) {
+			logger.info("O usuário recebido para alterar não é válido.");
+			logger.info("Erros encontrados:");
+			for (FieldError erro : resultado.getFieldErrors()) {
+				logger.info("{}", erro);
+			}
+			return "usuario/alterar";
+		} else {
+			List<Usuario> usuarios = usuarioRepository.findAll();
+			for (Usuario usuariosList : usuarios) {
+				if (usuariosList.getLogin().equals(usuario.getLogin()) && usuariosList.getCodigo() != (usuario.getCodigo())) {
+					return "redirect:/usuario/alterar/falha";
+				}
+			}
+			usuarioService.alterar(usuario);
+			return "redirect:/usuario/alterar/sucesso";
+		}
+	}
+	
+	@GetMapping("/alterar/sucesso")
+	public String mostrarMensagemAlterarSucesso(Usuario usuario, Model model) {
+		NotificacaoAlertify notificacao = new NotificacaoAlertify("Alteração de usuário efetuado com sucesso.",
+				TipoNotificaoAlertify.SUCESSO);
+		model.addAttribute("notificacao", notificacao);
+		return "usuario/pesquisar";
+	}
+
+	@GetMapping("/alterar/falha")
+	public String mostrarMensagemAlterarFalha(Usuario usuario, Model model) {
+		NotificacaoAlertify notificacao = new NotificacaoAlertify("Login já está sendo utilizado",
+				TipoNotificaoAlertify.ERRO);
+		model.addAttribute("notificacao", notificacao);
+		return "usuario/pesquisar";
 	}
 
 }
