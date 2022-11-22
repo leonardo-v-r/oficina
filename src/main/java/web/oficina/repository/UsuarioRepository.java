@@ -11,5 +11,5 @@ import web.oficina.repository.helper.usuario.UsuarioQueries;
 public interface UsuarioRepository extends JpaRepository<Usuario, Long>, UsuarioQueries{
 	
 	List<Usuario> findByStatus(StatusUsuario status);
-    
+	Usuario findByLogin(String login);
 }
