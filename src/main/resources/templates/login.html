@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR" layout:decorate="~{layout/layoutpadrao}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<title>Cadastrar Equipamento</title>
+</head>
+<body>
+    <div layout:fragment="conteudo">
+		<div th:replace="~{layout/fragments/sidebar :: sidebar}"></div>
+		<!-- conteudo principal -->
+		<main class="mt-5 p-4 pt-5">
+            <p>Usuário exemplo: grosbilda / 12345</p>
+	        <p th:if="${param.error}">Usuário e/ou senha inválidos.</p>
+	        <p th:if="${param.logout}">Você foi deslogado.</p>
+            <form th:action="@{/login}" method="post">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Login</label>
+                    <input id="username" type="text" class="form-control" placeholder="Login">
+                    <span class="invalid-feedback"></span>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Senha</label>
+                    <input id="password" type="password" class="form-control" placeholder="Senha">
+                    <span class="invalid-feedback"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Conectar</button>
+            </form>
+        </main>
+    </div>
+</body>
+</html>
