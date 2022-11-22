@@ -24,11 +24,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import web.oficina.ajax.NotificacaoAlertify;
 import web.oficina.ajax.TipoNotificaoAlertify;
 import web.oficina.model.Equipamento;
+import web.oficina.model.Papel;
 import web.oficina.model.StatusEquipamento;
 import web.oficina.model.StatusUsuario;
 import web.oficina.model.Usuario;
 import web.oficina.model.filter.UsuarioFilter;
 import web.oficina.pagination.PageWrapper;
+import web.oficina.repository.PapelRepository;
 import web.oficina.repository.UsuarioRepository;
 import web.oficina.service.UsuarioService;
 
@@ -39,13 +41,18 @@ public class UsuarioController {
 	private static final Logger logger = LoggerFactory.getLogger(UsuarioController.class);
 
 	@Autowired
+	private PapelRepository papelRepository;
+
+	@Autowired
 	private UsuarioService usuarioService;
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
 	@GetMapping("/abrircadastrar")
-	public String abrirCadastro(Usuario usuario) {
+	public String abrirCadastro(Usuario usuario, Model model) {
+		List<Papel> papeis = papelRepository.findAll();
+		model.addAttribute("todosPapeis", papeis);		
 		return "usuario/cadastrar";
 	}
 
