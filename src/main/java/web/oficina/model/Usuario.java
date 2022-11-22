@@ -1,6 +1,8 @@
 package web.oficina.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +11,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -49,6 +54,11 @@ public class Usuario implements Serializable {
     
 	@Enumerated(EnumType.STRING)
     private StatusUsuario status = StatusUsuario.ATIVO;
+
+    @ManyToMany
+	@JoinTable(name = "usuario_papel", joinColumns = @JoinColumn(name = "codigo_usuario"), inverseJoinColumns = @JoinColumn(name = "codigo_papel"))
+	private List<Papel> papeis = new ArrayList<>();
+
     
     public StatusUsuario getStatus() {
         return status;
@@ -93,8 +103,14 @@ public class Usuario implements Serializable {
     }
     public void setAdmin(Boolean admin) {
         this.admin = admin;
+    }  
+    public List<Papel> getPapeis() {
+        return papeis;
     }
-
+    public void setPapeis(List<Papel> papeis) {
+        this.papeis = papeis;
+    }
+    
     @Override
     public int hashCode() {
         final int prime = 31;
