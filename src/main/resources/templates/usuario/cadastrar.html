@@ -12,7 +12,7 @@
 		<!-- conteudo principal -->
 		<main class="mt-5 p-4 pt-5">
 			<h2>Cadastrar usuário</h2>
-			<form th:action="@{/usuario/cadastrar}" method="post" th:object="${usuario}">
+			<form th:action="@{/usuario/cadastroNovo}" method="post" th:object="${usuario}">
 				<div class="mb-3">
 					<label for="nome" class="form-label">Nome</label>
 					<input type="text" class="form-control" th:field="*{nome}" placeholder="Digite o nome do usuário" th:errorclass="is-invalid">
@@ -28,10 +28,9 @@
 					<input type="password" class="form-control" th:field="*{senha}" placeholder="Digite a senha do usuário" th:errorclass="is-invalid">
 					<span class="invalid-feedback" th:if="${#fields.hasErrors('senha')}" th:each="erro : ${#fields.errors('senha')}" th:text="${erro} + '. '"></span>
 				</div>
-				<div class="mb-3">
-					<input type="checkbox" id="admin1" name="admin" th:field="*{admin}">
-					<input type="hidden" name="_admin" value="on" />
-					<label for="admin1">Administrador</label>
+				<div th:each="papel: ${todosPapeis}" class="form-check">
+					<input type="checkbox" th:field="*{papeis}" th:value="${papel.codigo}" class="form-check-input">
+					<label th:for="${#ids.prev('papeis')}" th:text="${papel.nome}" class="form-check-label">Texto checkbox 1</label>
 				</div>
 				<button type="submit" class="btn btn-primary">Cadastrar</button>
 			</form>
