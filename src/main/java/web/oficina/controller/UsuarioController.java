@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.SortDefault;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,10 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import web.oficina.ajax.NotificacaoAlertify;
 import web.oficina.ajax.TipoNotificaoAlertify;
-import web.oficina.model.Equipamento;
 import web.oficina.model.Papel;
-import web.oficina.model.StatusEquipamento;
-import web.oficina.model.StatusUsuario;
 import web.oficina.model.Usuario;
 import web.oficina.model.filter.UsuarioFilter;
 import web.oficina.pagination.PageWrapper;
@@ -48,6 +46,9 @@ public class UsuarioController {
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@GetMapping("/abrircadastrar")
 	public String abrirCadastro(Usuario usuario, Model model) {
@@ -75,6 +76,34 @@ public class UsuarioController {
 			usuarioService.salvar(usuario);
 			return "redirect:/usuario/cadastro/sucesso";
 		}
+	}
+
+	@PostMapping("/cadastroNovo")
+	public String cadastroNovo(Usuario usuario, BindingResult resultado, Model model) {
+
+		if (resultado.hasErrors()) {
+			logger.info("O usuário recebido para cadastrar não é válido.");
+			logger.info("Erros encontrados:");
+			for (FieldError erro : resultado.getFieldErrors()) {
+				logger.info("{}", erro);
+			}
+			return "usuario/cadastrar";
+		}
+		if (usuario.getPapeis().isEmpty()) {
+			List<Papel> papeis = papelRepository.findAll();
+			model.addAttribute("todosPapeis", papeis);
+			return "usuario/cadastrar";
+		}
+		List<Usuario> usuarios = usuarioRepository.findAll();
+		for (Usuario usuariosList : usuarios) {
+			if (usuariosList.getLogin().equals(usuario.getLogin())) {
+				return "redirect:/usuario/cadastro/falha";
+			}
+		}
+		usuario.setAtivo(true);
+		usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
+		usuarioService.salvar(usuario);
+		return "redirect:/usuario/cadastro/sucesso";
 	}
 
 	@GetMapping("/cadastro/sucesso")
@@ -154,7 +183,7 @@ public class UsuarioController {
 	
 	@PostMapping("/remover")
 	public String remover(Usuario usuario) {
-		usuario.setStatus(StatusUsuario.EXCLUIDO);
+		usuario.setAtivo(false);
 		usuarioService.alterar(usuario);
 		return "redirect:/usuario/remover/sucesso";
 	}

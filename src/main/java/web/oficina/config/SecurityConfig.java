@@ -28,7 +28,8 @@ public class SecurityConfig {
 		http
 		.authorizeRequests()
 			.antMatchers("/css/**", "/js/**", "/images/**", "/", "/index.html").permitAll()
-			.antMatchers("/usuario/abrirpesquisar").hasRole("ADMIN")
+			// rotas que precisam de permissão para serem acessadas
+			.antMatchers("/equipamento/abrircadastrar").hasRole("ADMIN")
 			.and()
 			.formLogin()
 				.loginPage("/login").permitAll()
@@ -42,14 +43,14 @@ public class SecurityConfig {
     @Bean
  	public UserDetailsService userDetailsService() {    	
           JdbcUserDetailsManager manager = new JdbcUserDetailsManager(dataSource);
-          manager.setUsersByUsernameQuery("select login, senha, status "
+          manager.setUsersByUsernameQuery("select login, senha, ativo "
         		  						+ "from usuario "
         		  						+ "where login = ?");
           manager.setAuthoritiesByUsernameQuery(
-        		  "SELECT tab.nome , papel.nome FROM"
-        		+ "(SELECT usuario.nome , usuario.codigo FROM usuario WHERE login = ?) as tab "
-        		+ " INNER JOIN usuario_papel ON codigo_usuario = tab.codigo "
-        		+ " INNER JOIN papel ON codigo_papel = papel.codigo;");
+				"SELECT tab.login, papel.nome "
+				+ "FROM (SELECT usuario.login, usuario.codigo FROM usuario WHERE login = ?) as tab "
+				+ "INNER JOIN usuario_papel ON codigo_usuario = tab.codigo "
+				+ "INNER JOIN papel ON codigo_papel = papel.codigo");
           return manager;
 	}
     

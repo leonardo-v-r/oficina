@@ -47,32 +47,22 @@ public class Usuario implements Serializable {
     @NotBlank(message = "Senha é obrigatória")
     @Column(name = "senha")
     private String senha;
-
-    @NotNull(message = "Esse campo é obrigatório")
-    @Column(name = "admin")
-    private boolean admin = false;
     
-	@Enumerated(EnumType.STRING)
-    private StatusUsuario status = StatusUsuario.ATIVO;
+    @NotNull(message = "Esse campo é obrigatório")
+    @Column(name = "ativo")
+    private Boolean ativo = false;
 
     @ManyToMany
 	@JoinTable(name = "usuario_papel", joinColumns = @JoinColumn(name = "codigo_usuario"), inverseJoinColumns = @JoinColumn(name = "codigo_papel"))
 	private List<Papel> papeis = new ArrayList<>();
 
     
-    public StatusUsuario getStatus() {
-        return status;
+    public Boolean getAtivo() {
+        return ativo;
     }
-    public void setStatus(StatusUsuario status) {
-        this.status = status;
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
     }
-
-    public boolean isAdmin() {
-		return admin;
-	}
-	public void setAdmin(boolean isAdmin) {
-		this.admin = isAdmin;
-	}
 	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
 	}
@@ -98,12 +88,6 @@ public class Usuario implements Serializable {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-    public Boolean getAdmin() {
-        return admin;
-    }
-    public void setAdmin(Boolean admin) {
-        this.admin = admin;
-    }  
     public List<Papel> getPapeis() {
         return papeis;
     }
@@ -135,10 +119,9 @@ public class Usuario implements Serializable {
             return false;
         return true;
     }
-
     @Override
-	public String toString() {
-		return "Usuario [codigo=" + codigo + ", nome=" + nome + ", login=" + login + ", senha=" + senha + ", admin="
-				+ admin + ", status=" + status + "]";
-	}  
+    public String toString() {
+        return "Usuario [codigo=" + codigo + ", nome=" + nome + ", login=" + login + ", senha=" + senha + ", ativo="
+                + ativo + ", papeis=" + papeis.toString() + "]";
+    }
 }
