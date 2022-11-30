@@ -1,29 +1,59 @@
 <!DOCTYPE html>
-<html lang="pt-BR" layout:decorate="~{layout/layoutpadrao}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>Cadastrar Equipamento</title>
+<title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">Controle de Vacinação</title>
+	<link rel="shortcut icon" th:href="@{/images/logo.png}" />
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" type="text/css" href="../../static/css/vendors/bootstrap5/bootstrap.min.css" th:href="@{/css/vendors/bootstrap5/bootstrap.min.css}"/>
+	<!-- Bootstrap Icons -->
+	<link rel="stylesheet" type="text/css" href="../../static/css/vendors/bootstrap5/bootstrap-icons.css" th:href="@{/css/vendors/bootstrap5/bootstrap-icons.css}"/>
+	<!-- Estilo Principal do Template -->
+	<link rel="stylesheet" type="text/css" href="../../static/css/style.css" th:href="@{/css/style.css}">
+	<!-- AlertifyJS CSS -->
+	<link rel='stylesheet' type="text/css" href="../../static/css/vendors/alertifyjs/alertify.min.css" th:href="@{/css/vendors/alertifyjs/alertify.min.css}">
+	<link rel='stylesheet' type="text/css" href="../../static/css/vendors/alertifyjs/bootstrap.min.css" th:href="@{/css/vendors/alertifyjs/bootstrap.min.css}">
+	<!-- flatpickr -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.css" integrity="sha256-RXPAyxHVyMLxb0TYCM2OW5R4GWkcDe02jdYgyZp41OU=" crossorigin="anonymous">
+</title>
 </head>
 <body>
-    <div layout:fragment="conteudo">
-		<div th:replace="~{layout/fragments/sidebar :: sidebar}"></div>
-		<!-- conteudo principal -->
-		<main class="mt-5 p-4 pt-5">
-	        <p th:if="${param.error}">Usuário e/ou senha inválidos.</p>
-	        <p th:if="${param.logout}">Você foi deslogado.</p>
-            <form th:action="@{/login}" method="post">
-                <div class="mb-3">
-                    <label for="username" class="form-label">Login</label>
-                    <input id="username" type="text" name="username" class="form-control">
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Senha</label>
-                    <input id="password" type="password" name="password" class="form-control" placeholder="Senha">
-                </div>
-                <input type="submit" value="Logar" class="btn btn-primary mt-4">
-            </form>
-        </main>
+    <section class="vh-100" style="background-color: #508bfc;">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+              <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                <div class="card-body p-5 text-center">
+                  <i class="bi bi-person-workspace fs-1"></i>
+                  <p th:if="${param.error}">Usuário e/ou senha inválidos.</p>
+	              <p th:if="${param.logout}">Você foi deslogado.</p>
+                  <form th:action="@{/login}" method="post">
+                    <div class="form-outline mb-4">
+                        <label for="username" class="form-label">Usuário</label>
+                        <input id="username" type="text" name="username" class="form-control" placeholder="Entre com seu usuário">
+                    </div>
+        
+                    <div class="form-outline mb-4">
+                        <label for="password" class="form-label">Senha</label>
+                        <input id="password" type="password" name="password" class="form-control" placeholder="Entre com a sua senha">
+                    </div>
+                    <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+                </form>      
+            </div>
+        </div>
     </div>
+          </div>
+        </div>
+      </section>
+    <!-- Bootstrap JS -->
+	<script src="../../static/js/vendors/bootstrap5/bootstrap.bundle.min.js" th:src="@{/js/vendors/bootstrap5/bootstrap.bundle.min.js}"></script>
+    <!-- AlertifyJS JS -->
+	<script src="../../static/js/vendors/alertifyjs/alertify.min.js" th:src="@{/js/vendors/alertifyjs/alertify.min.js}"></script>
+    <!-- CodigoNinja JS -->
+	<script src="../../static/js/codigoninjadogodoi.js" th:src="@{/js/codigoninjadogodoi.js}"></script>
+    <!-- flatpickr -->
+	<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.js" integrity="sha256-AkQap91tDcS4YyQaZY2VV34UhSCxu2bDEIgXXXuf5Hg=" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/l10n/pt.js" integrity="sha256-dToT8NhAhejnL0aGbHv9BP6u+1u7vgv2QPUpkuDUhws=" crossorigin="anonymous"></script>
 </body>
 </html>

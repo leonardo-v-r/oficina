@@ -6,8 +6,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -52,9 +51,9 @@ public class Usuario implements Serializable {
     @Column(name = "ativo")
     private Boolean ativo = false;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "usuario_papel", joinColumns = @JoinColumn(name = "codigo_usuario"), inverseJoinColumns = @JoinColumn(name = "codigo_papel"))
-	private List<Papel> papeis = new ArrayList<>();
+    private List<Papel> papeis = new ArrayList<>();
 
     
     public Boolean getAtivo() {

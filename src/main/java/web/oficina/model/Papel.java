@@ -16,8 +16,8 @@ public class Papel implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="gerador", sequenceName="papel_codigo_seq", allocationSize=1)
-	@GeneratedValue(generator="gerador", strategy=GenerationType.SEQUENCE)
+	@SequenceGenerator(name="papel_seq_gen", sequenceName="papel_codigo_seq", allocationSize=1)
+	@GeneratedValue(generator="papel", strategy=GenerationType.SEQUENCE)
 	private Long codigo;
 	private String nome;
 
