@@ -16,27 +16,33 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 public class SecurityConfig {
-
+	
 	@Autowired
 	private DataSource dataSource;
 	
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http
-		.authorizeRequests()
-			.antMatchers("/css/**", "/js/**", "/images/**", "/", "/index.html").permitAll()
-			// rotas que precisam de permissão para serem acessadas
-			.antMatchers("/equipamento/abrircadastrar").hasRole("ADMIN")
-			.and()
-			.formLogin()
-				.loginPage("/login").permitAll()
-					.defaultSuccessUrl("/")
-				.and()
-			.logout()
-				.logoutSuccessUrl("/");
+		http.authorizeRequests()
+			.antMatchers("/css/**").permitAll()
+			.antMatchers("/images/**").permitAll()
+			.antMatchers("/js/**").permitAll()
+			.antMatchers("/usuario/abrircadastrar").permitAll()
+			.antMatchers("/usuario/cadastroNovo").permitAll()
+			.anyRequest().authenticated();
+        
+        http.formLogin()
+        .loginPage("/login")
+        .defaultSuccessUrl("/")
+        .permitAll();
+        
+        http.logout()
+        .logoutRequestMatcher(
+        		new AntPathRequestMatcher("/logout", "GET")
+        ).logoutSuccessUrl("/login");
         return http.build();
     }
     
@@ -53,7 +59,7 @@ public class SecurityConfig {
 				+ "INNER JOIN papel ON codigo_papel = papel.codigo");
           return manager;
 	}
-    
+	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		String idEnconder = "argon2";
@@ -63,6 +69,4 @@ public class SecurityConfig {
 		PasswordEncoder passwordEncoder = new DelegatingPasswordEncoder(idEnconder, encoders);
 		return passwordEncoder;
 	}
-
 }
-

@@ -47,8 +47,7 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+	@Autowired PasswordEncoder passwordEncoder;
 
 	@GetMapping("/abrircadastrar")
 	public String abrirCadastro(Usuario usuario, Model model) {
@@ -123,7 +122,8 @@ public class UsuarioController {
 	}
 	
 	@GetMapping("/abrirpesquisar")
-	public String abrirPesquisa(Usuario usuario) {
+	public String abrirPesquisa(Usuario usuario, String queryString, Model model) {
+		model.addAttribute("queryString", queryString);
 		return "usuario/pesquisar";
 	}
 	

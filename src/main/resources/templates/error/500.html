@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>Mensagem</title>
+<title>Erro 500</title>
 </head>
 <body>
 	<div layout:fragment="conteudo">
@@ -12,8 +12,15 @@
 
 		<!-- conteudo principal -->
 		<main class="mt-5 p-4 pt-5">
-			<h3 th:text="${mensagem}">Mensagem</h3>
+			<div class="container-fluid">
+				<img th:src="@{/images/500.png}" class="img-fluid mx-auto d-block mt-5" alt="Erro 404">
+				<h3 class="text-center mt-5 mb-5">
+					Ocorreu um erro interno no servidor. <a th:href="@{/}">Volte para a página principal.</a>
+				</h3>
+			</div>
 		</main>
+		<!-- !conteudo principal -->
+
 	</div>
 
 </body>
