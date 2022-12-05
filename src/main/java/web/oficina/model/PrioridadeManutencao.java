@@ -1,7 +1,8 @@
 package web.oficina.model;
 
 public enum PrioridadeManutencao {
-
+	
+    URGENTE("Urgente"),
     ALTA("Alta"),
     MEDIA("Média"),
     BAIXA("Baixa");

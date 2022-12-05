@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR" layout:decorate="~{layout/layoutpadrao}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<title>Cadastrar manutenção</title>
+</head>
+<body>
+	<div layout:fragment="conteudo">
+		<div th:replace="~{layout/fragments/sidebar :: sidebar}"></div>
+		<main class="mt-5 p-4 pt-5">
+			<h2>Cadastrar nova manutenção</h2>
+			<form th:action="@{/manutencao/cadastrar}" method="post" th:object="${manutencao}">
+				<div class="mb-3">
+					<label for="nome" class="form-label">
+						Equipamento: 
+						<span th:text="${equipamento.nome}"></span>
+					</label>
+				</div>
+				<input type="hidden" class="form-control" id="equipamento" name="equipamento" th:field="*{equipamento}" th:value="${equipamentoModel}">
+				<div class="mb-3">
+					<label for="usuario" class="form-label">Mecanico</label>
+					<select id="usuario" name="usuario" th:field="*{usuario}" class="form-select">
+						<option th:each="u : ${usuario}" th:value="${u.codigo}" th:text="${u.nome}"></option>
+					</select>
+				</div>
+				<div class="mb-3">
+					<label for="prioridade" class="form-label">Prioridade</label>
+					<select id="prioridade" th:field="*{prioridade}" name="prioridade" class="form-select">
+						<option th:each="p : ${prioridade}" th:value="${p}" th:text="${p.descricao}"></option>
+					</select>
+				</div>
+				<div class="mb-3">
+					<label for="observacao" class="form-label">Observação</label>
+					<textarea class="form-control" th:field="*{obsAdmin}" placeholder="Digite a observação da manutenção" th:errorclass="is-invalid"></textarea>
+				</div>
+				<button type="submit" class="btn btn-primary">Cadastrar</button>
+			</form>
+			<div th:if="${notificacao != null}" th:object="${notificacao}">
+				<input type="hidden" id="mensagem" th:value="*{mensagem}">
+				<input type="hidden" id="tipo" th:value="*{tipo}">
+				<input type="hidden" id="intervalo" th:value="*{intervalo}">
+			</div>
+		</main>
+	</div>
+</body>
+</html>

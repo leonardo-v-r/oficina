@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <body>
-	<!-- offcanvas sidebar -->
 	<div class="offcanvas offcanvas-start bg-dark text-white sidebar-nav" tabindex="-1" id="sidebar" th:fragment="sidebar">
 		<div class="offcanvas-body">
 			<nav class="navbar-dark">
 				<ul class="navbar-nav">
 					<li>
 						<div class="small fw-bold text-uppercase px-3 mt-3">Boas vindas á oficina!</div>
-					</li>					<li class="my-2">
+					</li>
+					<li class="my-2">
 						<hr class="dropdown-toggle-split" />
 					</li>
-					<!-- 1o elemento -->
 					<li>
 						<a class="nav-link px-3 sidebar-link text-white" data-bs-toggle="collapse" href="#equipamentos">
 							<span>Equipamentos</span>
@@ -20,8 +19,7 @@
 									<i class="bi bi-chevron-down"></i>
 								</span>
 							</span>
-						</a>   
-						
+						</a>
 						<div class="collapse" id="equipamentos" th:classappend=" ${#strings.startsWith(#request.requestURI, '/equipamentos')} ? show">
 							<ul class="navbar-nav ps-3">
 								<li>
@@ -42,7 +40,6 @@
 								</li>
 							</ul>
 						</div>
-						
 					</li>
 					<li>
 						<a class="nav-link px-3 sidebar-link text-white" data-bs-toggle="collapse" href="#usuarios">
@@ -52,8 +49,7 @@
 									<i class="bi bi-chevron-down"></i>
 								</span>
 							</span>
-						</a>   
-						
+						</a>
 						<div class="collapse" id="usuarios" th:classappend=" ${#strings.startsWith(#request.requestURI, '/usuarios')} ? show">
 							<ul class="navbar-nav ps-3">
 								<li>
@@ -74,12 +70,26 @@
 								</li>
 							</ul>
 						</div>
-						
+					</li>
+					<li>
+						<a th:href="@{/manutencoes/abrirpesquisar}" class="nav-link px-3">
+							<span class="me-2">
+								<i class="bi bi-plus-square text-white"></i>
+							</span>
+							<span class="text-white">Pesquisar manutenções</span>
+						</a>
+					</li>
+					<li>
+						<a th:href="@{/manutencoes/pesquisarminhas}" class="nav-link px-3">
+							<span class="me-2">
+								<i class="bi bi-plus-square text-white"></i>
+							</span>
+							<span class="text-white">Minhas manutenções</span>
+						</a>
 					</li>
 				</ul>
 			</nav>
 		</div>
 	</div>
-	<!-- !offcanvas sidebar -->
 </body>
 </html>
