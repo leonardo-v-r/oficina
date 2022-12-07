@@ -43,7 +43,7 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 						</div>
 					</li>
 					<li>
-						<a class="nav-link px-3 sidebar-link text-white" data-bs-toggle="collapse" href="#usuarios">
+						<a class="nav-link px-3 sidebar-link text-white" data-bs-toggle="collapse" href="#usuarios" sec:authorize="hasRole('ROLE_ADMIN')">
 							<span>Usuários</span>
 							<span class="ms-auto">
 								<span class="right-icon">
@@ -73,7 +73,7 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 						</div>
 					</li>
 					<li>
-						<a th:href="@{/manutencoes/abrirpesquisar}" class="nav-link px-3">
+						<a th:href="@{/manutencoes/abrirpesquisar}" class="nav-link px-3" sec:authorize="hasRole('ROLE_ADMIN')">
 							<span class="me-2">
 								<i class="bi bi-plus-square text-white"></i>
 							</span>
@@ -81,7 +81,7 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 						</a>
 					</li>
 					<li>
-						<a th:href="@{/manutencoes/pesquisarminhas}" class="nav-link px-3">
+						<a th:href="@{/manutencoes/pesquisarminhas}" class="nav-link px-3" sec:authorize="hasRole('ROLE_USER')">
 							<span class="me-2">
 								<i class="bi bi-plus-square text-white"></i>
 							</span>

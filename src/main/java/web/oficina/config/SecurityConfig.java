@@ -30,8 +30,8 @@ public class SecurityConfig {
 			.antMatchers("/css/**").permitAll()
 			.antMatchers("/images/**").permitAll()
 			.antMatchers("/js/**").permitAll()
-			.antMatchers("/usuario/abrircadastrar").permitAll()
-			.antMatchers("/usuario/cadastroNovo").permitAll()
+			.antMatchers("/usuario/**").hasRole("ADMIN")
+			.antMatchers("/equipamento/**").hasRole("ADMIN")
 			.anyRequest().authenticated();
         
         http.formLogin()
