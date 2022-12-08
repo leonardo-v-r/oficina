@@ -1,7 +1,7 @@
 LEONARDO
- - vai deixar adicionado no sql alguns usuarios adm e usuarios normal já cadastrados
- - tirar o acesso da tela de cadastro de usuario sem logar (todo o sistema 
- - apenas checkbox de admin no cadastro de usuário, ja que todos já tem permissão padrão
+ - [x] vai deixar adicionado no sql alguns usuarios adm e usuarios normal já cadastrados
+ - [x] tirar o acesso da tela de cadastro de usuario sem logar (todo o sistema 
+ - [x] apenas checkbox de admin no cadastro de usuário, ja que todos já tem permissão padrão
  - aparecer o nome do usuario perto de logout
  - usuario normal não tem acesso a parte de usuários e pesquisar manutenções, apenas "minhas manutenções"
  - bloquear todas as urls q o usuario padrão não tem acesso

@@ -55,6 +55,7 @@ public class Usuario implements Serializable {
 	@JoinTable(name = "usuario_papel", joinColumns = @JoinColumn(name = "codigo_usuario"), inverseJoinColumns = @JoinColumn(name = "codigo_papel"))
     private List<Papel> papeis = new ArrayList<>();
 
+    public Usuario() {}
     
     public Boolean getAtivo() {
         return ativo;

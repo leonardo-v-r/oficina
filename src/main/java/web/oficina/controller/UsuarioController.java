@@ -1,6 +1,8 @@
 package web.oficina.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -52,7 +54,7 @@ public class UsuarioController {
 	@GetMapping("/abrircadastrar")
 	public String abrirCadastro(Usuario usuario, Model model) {
 		List<Papel> papeis = papelRepository.findAll();
-		model.addAttribute("todosPapeis", papeis);		
+		model.addAttribute("papeis", papeis);	
 		return "usuario/cadastrar";
 	}
 
@@ -78,7 +80,7 @@ public class UsuarioController {
 	}
 
 	@PostMapping("/cadastroNovo")
-	public String cadastroNovo(Usuario usuario, BindingResult resultado, Model model) {
+	public String cadastroNovo(Usuario usuario, BindingResult resultado) {
 
 		if (resultado.hasErrors()) {
 			logger.info("O usuário recebido para cadastrar não é válido.");
@@ -88,17 +90,21 @@ public class UsuarioController {
 			}
 			return "usuario/cadastrar";
 		}
+
+		// Define a role USER caso o usuário não tenha preenchido
 		if (usuario.getPapeis().isEmpty()) {
-			List<Papel> papeis = papelRepository.findAll();
-			model.addAttribute("todosPapeis", papeis);
-			return "usuario/cadastrar";
+			Papel papel = papelRepository.findByNome("ROLE_USER");
+			List<Papel> papeis = new ArrayList<Papel>();
+			papeis.add(papel);
+			usuario.setPapeis(papeis);
 		}
-		List<Usuario> usuarios = usuarioRepository.findAll();
-		for (Usuario usuariosList : usuarios) {
-			if (usuariosList.getLogin().equals(usuario.getLogin())) {
-				return "redirect:/usuario/cadastro/falha";
-			}
+
+		// Verifica se o usuário já existe
+		Optional<Usuario> usuarioExiste = usuarioRepository.findByLogin(usuario.getLogin());
+		if (usuarioExiste.isPresent()) {
+			return "redirect:/usuario/cadastro/falha";
 		}
+
 		usuario.setAtivo(true);
 		usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
 		usuarioService.salvar(usuario);

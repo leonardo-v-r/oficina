@@ -29,9 +29,11 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 					<input type="password" class="form-control" th:field="*{senha}" placeholder="Digite a senha do usuário" th:errorclass="is-invalid">
 					<span class="invalid-feedback" th:if="${#fields.hasErrors('senha')}" th:each="erro : ${#fields.errors('senha')}" th:text="${erro} + '. '"></span>
 				</div>
-				<div th:each="papel: ${todosPapeis}" class="form-check">
-					<input type="checkbox" th:field="*{papeis}" th:value="${papel.codigo}" class="form-check-input">
-					<label th:for="${#ids.prev('papeis')}" th:text="${papel.nome}" class="form-check-label">Texto checkbox 1</label>
+				<div th:each="papel: ${papeis}" class="form-check">
+					<div th:unless="${papel.nome == 'ROLE_USER'}">
+						<input type="checkbox" th:field="*{papeis}" th:value="${papel.codigo}" class="form-check-input">
+						<label th:for="${#ids.prev('papeis')}" th:text="${papel.nome}" class="form-check-label">Texto checkbox 1</label>
+					</div>
 				</div>
 				<button type="submit" class="btn btn-primary">Cadastrar</button>
 			</form>
