@@ -36,40 +36,48 @@ public class ManutencaoController {
 
 	@Autowired
 	private ManutencaoService manutencaoService;
-	
+
 	@Autowired
 	private ManutencaoRepository manutencaoRepository;
-	
+
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-	
+
 	@Autowired
 	private EquipamentoService equipamentoService;
-	
+
 	private Equipamento equipamentoParaManutencao;
 
 	@PostMapping("/abrircadastrar")
 	public String abrirCadastro(Model model, Equipamento equipamento, Manutencao manutencao) {
-	    List<PrioridadeManutencao> prioridades = Arrays.asList(PrioridadeManutencao.values());
-	    List<Usuario> usuarios = usuarioRepository.findAll();
-	    equipamentoParaManutencao = equipamento;
+		List<PrioridadeManutencao> prioridades = Arrays.asList(PrioridadeManutencao.values());
+		List<Usuario> usuarios = usuarioRepository.findAll();
+		equipamentoParaManutencao = equipamento;
 		model.addAttribute("usuario", usuarios);
 		model.addAttribute("prioridade", prioridades);
 		System.out.println(equipamentoParaManutencao);
 		return "manutencao/cadastrar";
 	}
-	
+
 	@PostMapping("/cadastrar")
-	public String cadastrar(Manutencao manutencao, BindingResult resultado) {
+	public String cadastrar(@Valid Manutencao manutencao, BindingResult resultado) {
 		manutencao.setEquipamento(equipamentoParaManutencao);
-		manutencao.setObsUsuario("");
-		equipamentoParaManutencao.setStatus(StatusEquipamento.MANUTENCAO);
-		manutencaoService.salvar(manutencao);
-		equipamentoService.alterar(equipamentoParaManutencao);
+		if (resultado.hasErrors()) {
+			logger.info("O equipamento recabido para alterar não é válido.");
+			logger.info("Erros encontrados:");
+			for (FieldError erro : resultado.getFieldErrors()) {
+				logger.info("{}", erro);
+			}
+			return "equipamento/cadastrar";
+		} else {
+			equipamentoParaManutencao.setStatus(StatusEquipamento.MANUTENCAO);
+			manutencaoService.salvar(manutencao);
+			equipamentoService.alterar(equipamentoParaManutencao);
 			return "redirect:/manutencao/cadastro/sucesso";
-		
+		}
+
 	}
-	
+
 	@GetMapping("/manutencao/sucesso")
 	public String mostrarMensagemCadastroSucesso(Model model) {
 		NotificacaoAlertify notificacao = new NotificacaoAlertify("Cadastro de manutenção efetuado com sucesso.",

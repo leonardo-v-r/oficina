@@ -1,8 +1,8 @@
 CREATE TABLE public.manutencao
 (
     codigo bigserial NOT NULL,
-    obs_admin text,
-    obs_usuario text,
+    problema text,
+    solucao text,
     prioridade text,
     situacao text,
     codigo_usuario bigint,
