@@ -34,7 +34,7 @@ public class ApplicationLoggingAspect {
 	@Around("controllersPointcut()")
 	public Object logAroundController(ProceedingJoinPoint joinPoint) throws Throwable {
 
-		//Um monte de informacao extra que poderiamos mostrar
+		// Um monte de informacao extra que poderiamos mostrar
 //		ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 //		HttpServletRequest request = attributes.getRequest();
 //		logger.info("URL            : {}", request.getRequestURL().toString());
@@ -72,8 +72,8 @@ public class ApplicationLoggingAspect {
 		logParametersReceived(joinPoint);
 		Object result = joinPoint.proceed();
 		String nomeDaView = getViewName(result);
-		
-		if (nomeDaView.startsWith("redirect:")) {
+
+		if (nomeDaView != null && nomeDaView.startsWith("redirect:")) {
 			logger.trace("Redirecionando para a URL: {}", nomeDaView.substring(9));
 		} else {
 			logger.trace("Encaminhando para a view: {}", nomeDaView);
@@ -100,14 +100,15 @@ public class ApplicationLoggingAspect {
 		}
 		return map;
 	}
-	
+
 	private void logMethodName(ProceedingJoinPoint joinPoint) {
 		String nomeCompletoClasse = joinPoint.getSignature().getDeclaringTypeName();
 		int posicaoPonto = nomeCompletoClasse.lastIndexOf(".");
-		String nomeClasseApenas = (posicaoPonto != -1) ? nomeCompletoClasse.substring(posicaoPonto + 1) : nomeCompletoClasse;
+		String nomeClasseApenas = (posicaoPonto != -1) ? nomeCompletoClasse.substring(posicaoPonto + 1)
+				: nomeCompletoClasse;
 		logger.trace("Entrou no método: {}.{}", nomeClasseApenas, joinPoint.getSignature().getName());
 	}
-	
+
 	private void logParametersReceived(ProceedingJoinPoint joinPoint) {
 		Map<String, Object> parametros = getParameters(joinPoint);
 		if (!parametros.isEmpty()) {
@@ -117,7 +118,7 @@ public class ApplicationLoggingAspect {
 			}
 		}
 	}
-	
+
 	private String getViewName(Object result) {
 		String nomeDaView = null;
 		if (result instanceof ModelAndView) {
@@ -132,4 +133,3 @@ public class ApplicationLoggingAspect {
 	}
 
 }
-

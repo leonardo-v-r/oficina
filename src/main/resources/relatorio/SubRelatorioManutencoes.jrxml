@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SubRelatorioManutencoes" language="javascript" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="c5fa273b-0470-4a88-aa25-9d1fa7d509d8">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="390"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="602"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Banco oficina"/>
+	<property name="com.jaspersoft.studio.unit." value="cm"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="cm"/>
+	<parameter name="CODIGOEQUIPAMENTO" class="java.lang.Long"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT manutencao.problema,
+	manutencao.solucao,
+	manutencao.prioridade,
+	usuario.nome,
+	manutencao.codigo_equipamento
+FROM manutencao
+	INNER JOIN usuario ON 
+	 manutencao.codigo_usuario = usuario.codigo 
+WHERE 
+	 manutencao.codigo_equipamento = $P{CODIGOEQUIPAMENTO}]]>
+	</queryString>
+	<field name="problema" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="problema"/>
+		<property name="com.jaspersoft.studio.field.label" value="problema"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="manutencao"/>
+	</field>
+	<field name="solucao" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="solucao"/>
+		<property name="com.jaspersoft.studio.field.label" value="solucao"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="manutencao"/>
+	</field>
+	<field name="prioridade" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="prioridade"/>
+		<property name="com.jaspersoft.studio.field.label" value="prioridade"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="manutencao"/>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nome"/>
+		<property name="com.jaspersoft.studio.field.label" value="nome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="usuario"/>
+	</field>
+	<field name="codigo_equipamento" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="codigo_equipamento"/>
+		<property name="com.jaspersoft.studio.field.label" value="codigo_equipamento"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="manutencao"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="20">
+			<staticText>
+				<reportElement x="65" y="0" width="484" height="20" uuid="518e3957-0dfc-4a01-986c-cc3ff214c110"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<text><![CDATA[MANUTENÇÕES REALIZADAS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="72" splitType="Stretch">
+			<textField>
+				<reportElement x="130" y="1" width="424" height="17" uuid="1b38ae2a-37ef-47ae-a585-3a433efc8930"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="65" y="1" width="60" height="18" uuid="47b0c807-2cf4-43ab-aeaf-a17edbea7e1c">
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[Mecânico:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="130" y="18" width="424" height="18" uuid="6a836867-0189-4108-982b-01e1ecf70067">
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{problema}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="65" y="18" width="60" height="18" uuid="0e4efbc2-233a-4172-90d5-eb48288b09bf">
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[Problema:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="130" y="36" width="424" height="18" uuid="8ea73fc9-fb73-4f7a-bb10-f062072f0531">
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{solucao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="65" y="36" width="60" height="18" uuid="f6796d12-1a30-407d-af13-e7c7b42cc7d2">
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[Solução:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="130" y="54" width="424" height="18" uuid="4faabc9c-7b01-4973-a8a7-ad5eec850e8e">
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{prioridade}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="65" y="54" width="60" height="18" uuid="2ff2d870-e54c-4baa-adac-fc7fe0735457">
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[Prioridade:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="549" height="1" forecolor="#CC9900" uuid="2b56be29-bcdf-4993-b21b-1d82ba6be716"/>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

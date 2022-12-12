@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <body>
 	<div class="offcanvas offcanvas-start bg-dark text-white sidebar-nav" tabindex="-1" id="sidebar" th:fragment="sidebar">
 		<div class="offcanvas-body">
@@ -78,6 +77,14 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 								<i class="bi bi-plus-square text-white"></i>
 							</span>
 							<span class="text-white">Minhas manutenções</span>
+						</a>
+					</li>
+					<li>
+						<a th:href="@{/relatorio/todosequipamentos}" class="nav-link px-3" sec:authorize="hasRole('ROLE_ADMIN')">
+							<span class="me-2">
+								<i class="bi bi-plus-square text-white"></i>
+							</span>
+							<span class="text-white">Relatório</span>
 						</a>
 					</li>
 				</ul>
