@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -38,12 +39,20 @@ public class Manutencao implements Serializable{
     private PrioridadeManutencao prioridade;
 	@Enumerated(EnumType.STRING)
     private StatusManutencao situacao = StatusManutencao.PENDENTE;
-	@Column(name = "obs_usuario")
-    private String obsUsuario;
-	@Column(name = "obs_admin")
-    private String obsAdmin;
+	@NotBlank(message = "É necessário descrever o problema")
+    private String solucao = "Em andamento";
+	@NotBlank(message = "É necessário o que foi feito")
+    private String problema;
+    
 
-    public Long getCodigo() {
+	@Override
+	public String toString() {
+		return "Manutencao [codigo=" + codigo + ", usuario=" + usuario + ", equipamento=" + equipamento
+				+ ", prioridade=" + prioridade + ", situacao=" + situacao + ", solucao=" + solucao + ", problema="
+				+ problema + "]";
+	}
+
+	public Long getCodigo() {
 		return codigo;
 	}
 
@@ -83,20 +92,24 @@ public class Manutencao implements Serializable{
 		this.situacao = situacao;
 	}
 
-	public String getObsUsuario() {
-		return obsUsuario;
+	public String getSolucao() {
+		return solucao;
 	}
 
-	public void setObsUsuario(String obsUsuario) {
-		this.obsUsuario = obsUsuario;
+	public void setSolucao(String solucao) {
+		this.solucao = solucao;
 	}
 
-	public String getObsAdmin() {
-		return obsAdmin;
+	public String getProblema() {
+		return problema;
 	}
 
-	public void setObsAdmin(String obsAdmin) {
-		this.obsAdmin = obsAdmin;
+	public void setProblema(String problema) {
+		this.problema = problema;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@Override
@@ -124,11 +137,5 @@ public class Manutencao implements Serializable{
         return true;
     }
     
-	@Override
-	public String toString() {
-		return "Manutencao [codigo=" + codigo + ", usuario=" + usuario + ", equipamento=" + equipamento
-				+ ", prioridade=" + prioridade + ", situacao=" + situacao + ", obsUsuario=" + obsUsuario + ", obsAdmin="
-				+ obsAdmin + "]";
-	}
 
 }

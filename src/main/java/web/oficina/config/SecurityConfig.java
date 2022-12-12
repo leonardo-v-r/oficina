@@ -32,6 +32,7 @@ public class SecurityConfig {
 			.antMatchers("/js/**").permitAll()
 			.antMatchers("/usuario/**").hasRole("ADMIN")
 			.antMatchers("/equipamento/**").hasRole("ADMIN")
+			.antMatchers("/relatorio/**").hasRole("ADMIN")
 			.anyRequest().authenticated();
         
         http.formLogin()

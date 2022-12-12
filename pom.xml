@@ -103,7 +103,11 @@
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>6.18.0</version>
+		</dependency>
 		<!-- Adiciona as dependências de Segurança -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -118,7 +122,11 @@
 			<artifactId>bcprov-jdk15on</artifactId>
 			<version>1.69</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.mozilla</groupId>
+			<artifactId>rhino</artifactId>
+			<version>1.7R4</version>
+		</dependency>
 		<!-- Adiciona dependências para facilitar o desenvolvimento -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -127,7 +135,6 @@
 			<optional>true</optional>
 		</dependency>
 	</dependencies>
-
 	<!-- Empacotar como uma jar executavel -->
 	<build>
 		<plugins>
