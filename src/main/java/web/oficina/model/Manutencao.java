@@ -29,18 +29,24 @@ public class Manutencao implements Serializable{
 	@SequenceGenerator(name="gerador", sequenceName="equipamento_codigo_seq", allocationSize=1)
 	@GeneratedValue(generator="gerador", strategy = GenerationType.SEQUENCE)
     private Long codigo;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "codigo_usuario")
     private Usuario usuario;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "codigo_equipamento")
     private Equipamento equipamento;
+	
 	@Enumerated(EnumType.STRING)
     private PrioridadeManutencao prioridade;
+	
 	@Enumerated(EnumType.STRING)
-    private StatusManutencao situacao = StatusManutencao.PENDENTE;
+    private StatusManutencao situacao;
+	
 	@NotBlank(message = "É necessário descrever o problema")
     private String solucao = "Em andamento";
+	
 	@NotBlank(message = "É necessário o que foi feito")
     private String problema;
     
