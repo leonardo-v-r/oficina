@@ -18,34 +18,35 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.css" integrity="sha256-RXPAyxHVyMLxb0TYCM2OW5R4GWkcDe02jdYgyZp41OU=" crossorigin="anonymous">
 </title>
 </head>
-<body>
-    <section class="vh-100" style="background-color: #508bfc;">
-        <div class="container py-5 h-100">
-          <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-              <div class="card shadow-2-strong" style="border-radius: 1rem;">
-                <div class="card-body p-5 text-center">
-                  <i class="bi bi-person-workspace fs-1"></i>
-                  <p th:if="${param.error}">Usuário e/ou senha inválidos.</p>
-	              <p th:if="${param.logout}">Você foi deslogado.</p>
-                  <form th:action="@{/login}" method="post">
-                    <div class="form-outline mb-4">
-                        <label for="username" class="form-label">Usuário</label>
-                        <input id="username" type="text" name="username" class="form-control" placeholder="Entre com seu usuário">
-                    </div>
-        
-                    <div class="form-outline mb-4">
-                        <label for="password" class="form-label">Senha</label>
-                        <input id="password" type="password" name="password" class="form-control" placeholder="Entre com a sua senha">
-                    </div>
-                    <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
-                </form>      
+<body class="text-bg-light">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-5">
+        <div class="card card-raised shadow-10 mt-5 mt-xl-10 mb-4">
+          <div class="card-body p-5">
+            <div class="text-center">
+              <h1 class="display-6 mb-5">Oficina</h1>
             </div>
-        </div>
-    </div>
+            <p th:if="${param.error}">Usuário e/ou senha inválidos.</p>
+            <p th:if="${param.logout}">Você foi deslogado.</p>
+            <form th:action="@{/login}" method="post">
+              <div class="form-floating mb-4">
+                <input type="text" class="form-control" id="floatingInput" name="username" placeholder="usuario">
+                <label for="floatingInput">Usuario</label>
+              </div>
+              <div class="form-floating mb-4">
+                <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="senha">
+                <label for="floatingPassword">Senha</label>
+              </div>
+              <div>
+                <button class="btn btn-primary" type="submit">Login</button>
+              </div>
+            </form>
           </div>
         </div>
-      </section>
+      </div>
+    </div>
+  </div>
     <!-- Bootstrap JS -->
 	<script src="../../static/js/vendors/bootstrap5/bootstrap.bundle.min.js" th:src="@{/js/vendors/bootstrap5/bootstrap.bundle.min.js}"></script>
     <!-- AlertifyJS JS -->
