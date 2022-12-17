@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR" layout:decorate="~{layout/layoutpadrao}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<title>Todas Manutenções</title>
+</head>
+<body>
+	<div layout:fragment="conteudo">
+		<div th:replace="~{layout/fragments/sidebar :: sidebar}"></div>
+
+		<main class="mt-5 p-4 pt-5">
+			<div class="container d-flex justify-content-center">
+				<div class="card card-raised mb-5 col-12">
+					<div class="card-body p-5">
+						<h3 class="card-title">Todas manutenções</h3>
+						<div class="card-subtitle mb-4">Lista das manutenções em andamento</div>
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th scope="col">Equipamento</th>
+									<th scope="col">Problema</th>
+									<th scope="col">Prioridade</th>
+									<th scope="col">Mecânico</th>
+									<th scope="col">Situação</th>
+
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="m : ${pagina.conteudo}">
+									<td th:text="${m.equipamento.nome}"></td>
+									<td th:text="${m.problema}"></td>
+									<td th:text="${m.prioridade.descricao}"></td>
+									<td th:text="${m.usuario.nome}"></td>
+									<td th:text="${m.situacao.descricao}"></td>
+								</tr>
+							</tbody>
+						</table>
+						<div th:replace="~{layout/fragments/paginacao :: paginacao(${pagina})}"></div>
+					</div>
+				</div>
+			</div>
+		</main>
+	</div>
+</body>
+</html>

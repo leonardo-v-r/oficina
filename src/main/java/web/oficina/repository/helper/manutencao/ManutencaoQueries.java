@@ -13,5 +13,6 @@ import web.oficina.model.filter.UsuarioFilter;
 public interface ManutencaoQueries {
 
 	Page<Manutencao> pesquisar( Pageable pageable);
+	Page<Manutencao> pesquisarTodas( Pageable pageable);
 	
 }

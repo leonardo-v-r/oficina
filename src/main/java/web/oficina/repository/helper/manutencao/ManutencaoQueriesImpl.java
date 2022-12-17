@@ -43,7 +43,41 @@ public class ManutencaoQueriesImpl implements ManutencaoQueries {
 		m.fetch("equipamento", JoinType.INNER);
 
 		predicateList.add(builder.equal(m.<Usuario>get("usuario").<String>get("login"), currentPrincipalName));
+		
+		
+		predicateList.add(builder.notEqual(m.<StatusManutencao>get("situacao"), StatusManutencao.FINALIZADA));
+		
+		Predicate[] predArray = new Predicate[predicateList.size()];
+		predicateList.toArray(predArray);
 
+		criteriaQuery.select(m).where(predArray);
+		PaginacaoUtil.prepararOrdem(m, criteriaQuery, builder, pageable);
+		typedQuery = manager.createQuery(criteriaQuery);
+		PaginacaoUtil.prepararIntervalo(typedQuery, pageable);
+
+		List<Manutencao> manutencoes = typedQuery.getResultList();
+
+		long totalManutencoes = PaginacaoUtil.getTotalRegistros(m, predArray, builder, manager);
+
+		Page<Manutencao> page = new PageImpl<>(manutencoes, pageable, totalManutencoes);
+
+		return page;
+	}
+	
+	@Override
+	public Page<Manutencao> pesquisarTodas(Pageable pageable) {
+
+
+		CriteriaBuilder builder = manager.getCriteriaBuilder();
+		CriteriaQuery<Manutencao> criteriaQuery = builder.createQuery(Manutencao.class);
+		Root<Manutencao> m = criteriaQuery.from(Manutencao.class);
+		TypedQuery<Manutencao> typedQuery;
+		List<Predicate> predicateList = new ArrayList<>();
+		m.fetch("usuario", JoinType.INNER);
+		m.fetch("equipamento", JoinType.INNER);
+
+		predicateList.add(builder.notEqual(m.<StatusManutencao>get("situacao"), StatusManutencao.FINALIZADA));
+		
 		Predicate[] predArray = new Predicate[predicateList.size()];
 		predicateList.toArray(predArray);
 

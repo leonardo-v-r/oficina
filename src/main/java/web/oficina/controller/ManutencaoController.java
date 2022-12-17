@@ -107,8 +107,19 @@ public class ManutencaoController {
 		return "manutencao/mostrarminhas";
 	}
 	
+	@GetMapping("/pesquisartodas")
+	public String pesquisarTodas( Model model,
+			@PageableDefault(size = 10) @SortDefault(sort = "codigo", direction = Sort.Direction.ASC) Pageable pageable,
+			HttpServletRequest request) {
+
+		Page<Manutencao> pagina = manutencaoRepository.pesquisarTodas(pageable);
+		PageWrapper<Manutencao> paginaWrapper = new PageWrapper<>(pagina, request);
+		model.addAttribute("pagina", paginaWrapper);
+		return "manutencao/mostrartodas";
+	}
+	
 	@PostMapping("/abrirtrabalhar")
-	public String remover(Manutencao manutencao) {
+	public String trabalhar(Manutencao manutencao) {
 		manutencao.setSituacao(StatusManutencao.EM_ANDAMENTO);
 		manutencaoService.alterar(manutencao);
 		return "redirect:/manutencao/trabalhar/sucesso";

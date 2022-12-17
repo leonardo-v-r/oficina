@@ -64,12 +64,10 @@
 						</div>
 					</li>
 					<li>
-						<a th:href="@{/manutencoes/abrirpesquisar}" class="nav-link px-3" sec:authorize="hasRole('ROLE_ADMIN')">
-							<span class="me-2">
-								<i class="bi bi-plus-square text-white"></i>
-							</span>
-							<span class="text-white">Pesquisar manutenções</span>
-						</a>
+						<a class="nav-link px-3">
+							<form th:action="@{/manutencao/pesquisartodas}" method="get">
+								<button type="submit" class="btn btn-primary">Todas manutenções</button>
+							</form>
 					</li>
 					<li>
 						<a class="nav-link px-3">
