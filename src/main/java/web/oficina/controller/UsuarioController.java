@@ -80,7 +80,7 @@ public class UsuarioController {
 	}
 
 	@PostMapping("/cadastroNovo")
-	public String cadastroNovo(Usuario usuario, BindingResult resultado) {
+	public String cadastroNovo(Usuario usuario, BindingResult resultado, Model model) {
 
 		if (resultado.hasErrors()) {
 			logger.info("O usuário recebido para cadastrar não é válido.");
@@ -115,6 +115,8 @@ public class UsuarioController {
 	public String mostrarMensagemCadastroSucesso(Usuario usuario, Model model) {
 		NotificacaoAlertify notificacao = new NotificacaoAlertify("Cadastro de usuário efetuado com sucesso.",
 				TipoNotificaoAlertify.SUCESSO);
+		List<Papel> papeis = papelRepository.findAll();
+		model.addAttribute("papeis", papeis);
 		model.addAttribute("notificacao", notificacao);
 		return "usuario/cadastrar";
 	}

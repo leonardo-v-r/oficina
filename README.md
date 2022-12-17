@@ -2,8 +2,8 @@ LEONARDO
  - [x] vai deixar adicionado no sql alguns usuarios adm e usuarios normal já cadastrados
  - [x] tirar o acesso da tela de cadastro de usuario sem logar
  - [x] apenas checkbox de admin no cadastro de usuário, ja que todos já tem permissão padrão
- - usuario normal tem acesso a somente "minhas manutenções"
- - bloquear todas as urls q o usuario padrão não tem acesso
+ - [x] usuario normal tem acesso a somente "minhas manutenções"
+ - [x] bloquear todas as urls q o usuario padrão não tem acesso
 
 GUSTAVO
  - [X] retirar do projeto a parte de buscar usuarios, deletar e alterar
