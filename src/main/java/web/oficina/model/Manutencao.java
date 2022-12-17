@@ -44,11 +44,12 @@ public class Manutencao implements Serializable{
 	@Enumerated(EnumType.STRING)
     private StatusManutencao situacao;
 	
-	@NotBlank(message = "É necessário descrever o problema")
+	@NotBlank(message = "É necessário descrever o que foi feito")
     private String solucao = "Em andamento";
-	
-	@NotBlank(message = "É necessário o que foi feito")
+	@NotBlank(message = "É necessário descrever o problema")
     private String problema;
+    
+
     
 
 	@Override

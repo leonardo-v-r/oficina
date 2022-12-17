@@ -48,14 +48,30 @@
 								<input type="hidden" name="equipamento.status" th:value="${m.equipamento.status}">
 								<input type="hidden" name="equipamento.codigo" th:value="${m.equipamento.codigo}">
 
-								<button style="background-color: orange;" type="submit" title="Trabalhar"  class="btn btn-secondary confirmacao">
+								<button style="background-color: orange;" type="submit" title="Trabalhar" class="btn btn-secondary confirmacao">
 									<span>TRABALHAR</span>
 								</button>
 							</form>
 						</td>
 						<td th:if="${m.situacao.descricao == 'Em andamento'}">
-							<form th:action="@{/manutencao/abrircadastrar}" method="post">
-								<button style="background-color: green;" type="submit" title="Editar" class="btn btn-secondary">
+							<form th:action="@{/manutencao/abrirfinalizar}" method="post">
+								<input type="hidden" name="codigo" th:value="${m.codigo}">
+								<input type="hidden" name="problema" th:value="${m.problema}">
+								<input type="hidden" name="solucao" th:value="${m.solucao}">
+								<input type="hidden" name="prioridade" th:value="${m.prioridade}">
+								<input type="hidden" name="situacao" th:value="${m.situacao}">
+
+								<input type="hidden" name="usuario.nome" th:value="${m.usuario.nome}">
+								<input type="hidden" name="usuario.login" th:value="${m.usuario.login}">
+								<input type="hidden" name="usuario.codigo" th:value="${m.usuario.codigo}">
+								<input type="hidden" name="usuario.senha" th:value="${m.usuario.senha}">
+								<input type="hidden" name="usuario.ativo" th:value="${m.usuario.ativo}">
+
+								<input type="hidden" name="equipamento.nome" th:value="${m.equipamento.nome}">
+								<input type="hidden" name="equipamento.marca" th:value="${m.equipamento.marca}">
+								<input type="hidden" name="equipamento.status" th:value="${m.equipamento.status}">
+								<input type="hidden" name="equipamento.codigo" th:value="${m.equipamento.codigo}">
+								<button style="background-color: green;" type="submit" title="Finalizar" class="btn btn-secondary">
 									<span>FINALIZAR</span>
 								</button>
 							</form>
