@@ -8,7 +8,50 @@
 <body>
 	<div layout:fragment="conteudo">
 		<div th:replace="~{layout/fragments/sidebar :: sidebar}"></div>
+
 		<main class="mt-5 p-4 pt-5">
+			<div class="container d-flex justify-content-center">
+				<div class="card card-raised mb-5 col-6">
+					<div class="card-body p-5">
+						<h3 class="card-title">Finalizar manutenção</h3>
+						<div class="card-subtitle mb-4">Informe a solução para finalizar</div>
+
+						<form th:action="@{/manutencao/finalizar}" method="post" th:object="${manutencao}">
+
+							<input type="hidden" name="codigo" th:value="${manutencao.codigo}">
+							<input type="hidden" name="problema" th:value="${manutencao.problema}">
+							<input type="hidden" name="prioridade" th:value="${manutencao.prioridade}">
+							<input type="hidden" name="situacao" th:value="${manutencao.situacao}">
+			
+							<input type="hidden" name="usuario.nome" th:value="${manutencao.usuario.nome}">
+							<input type="hidden" name="usuario.login" th:value="${manutencao.usuario.login}">
+							<input type="hidden" name="usuario.codigo" th:value="${manutencao.usuario.codigo}">
+							<input type="hidden" name="usuario.senha" th:value="${manutencao.usuario.senha}">
+							<input type="hidden" name="usuario.ativo" th:value="${manutencao.usuario.ativo}">
+			
+							<input type="hidden" name="equipamento.nome" th:value="${manutencao.equipamento.nome}">
+							<input type="hidden" name="equipamento.marca" th:value="${manutencao.equipamento.marca}">
+							<input type="hidden" name="equipamento.status" th:value="${manutencao.equipamento.status}">
+							<input type="hidden" name="equipamento.codigo" th:value="${manutencao.equipamento.codigo}">
+							<div class="mb-3">
+								<label for="nome" class="form-label">
+									Equipamento:
+									<span th:text="${manutencao.equipamento.nome}"></span>
+								</label>
+							</div>
+							<div class="mb-3">
+								<label for="solucao" class="form-label">Solução</label>
+								<textarea class="form-control" th:field="*{solucao}" placeholder="Digite o que voce fez" th:errorclass="is-invalid"></textarea>
+								<span class="invalid-feedback" th:if="${#fields.hasErrors('solucao')}" th:each="erro : ${#fields.errors('solucao')}" th:text="${erro} + '. '"></span>
+							</div>
+							<button type="submit" class="btn btn-primary">Finalizar</button>
+						</form>
+					</div>
+				</div>	
+			</div>
+		</main>
+
+		<!-- <main class="mt-5 p-4 pt-5">
 			<h2>Finalizar manutenção</h2>
 			<form th:action="@{/manutencao/finalizar}" method="post" th:object="${manutencao}">
 
@@ -40,7 +83,7 @@
 				</div>
 				<button type="submit" class="btn btn-primary">Finalizar</button>
 			</form>
-		</main>
+		</main> -->
 	</div>
 </body>
 </html>
