@@ -13,7 +13,7 @@
 					</li>
 					<li>
 						<a class="nav-link px-3 sidebar-link text-white" data-bs-toggle="collapse" href="#equipamentos" sec:authorize="hasRole('ROLE_ADMIN')">
-							<span>Equipamentos</span>
+							<span class="text-uppercase">Equipamentos</span>
 							<span class="ms-auto">
 								<span class="right-icon">
 									<i class="bi bi-chevron-down"></i>
@@ -23,19 +23,14 @@
 						<div class="collapse" id="equipamentos" th:classappend=" ${#strings.startsWith(#request.requestURI, '/equipamentos')} ? show">
 							<ul class="navbar-nav ps-3">
 								<li>
-									<a th:href="@{/equipamento/abrircadastrar}" class="nav-link px-3">
-										<span class="me-2">
-											<i class="bi bi-plus-square text-white"></i>
-										</span>
-										<span class="text-white">Cadastrar</span>
+									<a th:href="@{/equipamento/abrircadastrar}" class="nav-link px-3 text-white">
+										<span>Cadastrar</span>
 									</a>
 								</li>
 								<li>
-									<a th:href="@{/equipamento/abrirpesquisar}" class="nav-link px-3">
-										<span class="me-2">
-											<i class="bi bi-search text-white"></i>
-										</span>
-										<span class="text-white">Pesquisar</span>
+									<a th:href="@{/equipamento/abrirpesquisar}" class="nav-link px-3 text-white">
+
+										<span>Pesquisar</span>
 									</a>
 								</li>
 							</ul>
@@ -43,7 +38,7 @@
 					</li>
 					<li>
 						<a class="nav-link px-3 sidebar-link text-white" data-bs-toggle="collapse" href="#usuarios" sec:authorize="hasRole('ROLE_ADMIN')">
-							<span>Usuários</span>
+							<span class="text-uppercase">Usuários</span>
 							<span class="ms-auto">
 								<span class="right-icon">
 									<i class="bi bi-chevron-down"></i>
@@ -53,34 +48,42 @@
 						<div class="collapse" id="usuarios" th:classappend=" ${#strings.startsWith(#request.requestURI, '/usuarios')} ? show">
 							<ul class="navbar-nav ps-3">
 								<li>
-									<a th:href="@{/usuario/abrircadastrar}" class="nav-link px-3">
-										<span class="me-2">
-											<i class="bi bi-plus-square text-white"></i>
-										</span>
-										<span class="text-white">Cadastrar</span>
+									<a th:href="@{/usuario/abrircadastrar}" class="nav-link px-3 text-white">
+										<span>Cadastrar</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+
+					<li>
+						<a class="nav-link px-3 sidebar-link text-white" data-bs-toggle="collapse" href="#manutencoes">
+							<span class="text-uppercase">Manutenções</span>
+							<span class="ms-auto">
+								<span class="right-icon">
+									<i class="bi bi-chevron-down"></i>
+								</span>
+							</span>
+						</a>
+						<div class="collapse" id="manutencoes" th:classappend=" ${#strings.startsWith(#request.requestURI, '/manutencao')} ? show">
+							<ul class="navbar-nav ps-3">
+								<li sec:authorize="hasRole('ROLE_ADMIN')">
+									<a th:href="@{/manutencao/pesquisartodas}" class="nav-link px-3 text-white">
+										<span>Todas as manutenções</span>
+									</a>
+								</li>
+								<li sec:authorize="hasAnyRole('ROLE_USER','ROLE_ADMIN')">
+									<a th:href="@{/manutencao/pesquisarminhas}" class="nav-link px-3 text-white">
+										<span>Minhas manutenções</span>
 									</a>
 								</li>
 							</ul>
 						</div>
 					</li>
 					<li>
-						<a class="nav-link px-3">
-							<form th:action="@{/manutencao/pesquisartodas}" method="get">
-								<button type="submit" class="btn btn-primary">Todas manutenções</button>
-							</form>
-					</li>
-					<li>
-						<a class="nav-link px-3">
-							<form th:action="@{/manutencao/pesquisarminhas}" method="get">
-								<button type="submit" class="btn btn-primary">Minhas manutenções</button>
-							</form>
-					</li>
-					<li>
-						<a th:href="@{/relatorio/todosequipamentos}" class="nav-link px-3" sec:authorize="hasRole('ROLE_ADMIN')">
-							<span class="me-2">
-								<i class="bi bi-plus-square text-white"></i>
-							</span>
-							<span class="text-white">Relatório</span>
+						<a th:href="@{/relatorio/todosequipamentos}" class="nav-link px-3 text-white" sec:authorize="hasRole('ROLE_ADMIN')">
+							<span class="material-icons me-2 align-middle">picture_as_pdf</span>
+							<span class="align-middle">Relatório</span>
 						</a>
 					</li>
 				</ul>
