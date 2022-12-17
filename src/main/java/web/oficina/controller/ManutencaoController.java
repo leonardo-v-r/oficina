@@ -116,7 +116,41 @@ public class ManutencaoController {
 	
 	@GetMapping("/trabalhar/sucesso")
 	public String mostrarMensagemRemoverSucesso(Model model) {
-		NotificacaoAlertify notificacao = new NotificacaoAlertify("Trabalho iniciado com sucesso.",
+		NotificacaoAlertify notificacao = new NotificacaoAlertify("Manutenção iniciada com sucesso.",
+				TipoNotificaoAlertify.SUCESSO);
+		model.addAttribute("notificacao", notificacao);
+		return "/index";
+	}
+	
+	@PostMapping("/abrirfinalizar")
+	public String abrirFinalizar(Model model, Manutencao manutencao) {
+		return "manutencao/finalizar";
+	}
+	
+	@PostMapping("/finalizar")
+	public String finalizar(@Valid Manutencao manutencao, BindingResult resultado,
+			Model model) {
+		if (resultado.hasErrors()) {
+			logger.info("A manutenção recebida para finalizar não é válida.");
+			logger.info("Erros encontrados:");
+			for (FieldError erro : resultado.getFieldErrors()) {
+				logger.info("{}", erro);
+			}
+			return "manutencao/finalizar";
+		} else {
+			Equipamento equipamento = manutencao.getEquipamento();
+			equipamento.setStatus(StatusEquipamento.DISPONIVEL);
+			equipamentoService.alterar(equipamento);
+			manutencao.setSituacao(StatusManutencao.FINALIZADA);
+			manutencaoService.alterar(manutencao);
+			return "redirect:/manutencao/finalizar/sucesso";
+		}
+
+	}
+	
+	@GetMapping("/finalizar/sucesso")
+	public String mostrarMensagemFinalizarSucesso(Model model) {
+		NotificacaoAlertify notificacao = new NotificacaoAlertify("Manutenção finalizada com sucesso.",
 				TipoNotificaoAlertify.SUCESSO);
 		model.addAttribute("notificacao", notificacao);
 		return "/index";

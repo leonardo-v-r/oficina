@@ -71,8 +71,8 @@
 							<span class="text-white">Pesquisar manutenções</span>
 						</a>
 					</li>
-					<li sec:authorize="hasRole('ROLE_USER')">
-						<a class="nav-link px-3" sec:authorize="hasRole('ROLE_USER')">
+					<li>
+						<a class="nav-link px-3">
 							<form th:action="@{/manutencao/pesquisarminhas}" method="get">
 								<button type="submit" class="btn btn-primary">Minhas manutenções</button>
 							</form>
