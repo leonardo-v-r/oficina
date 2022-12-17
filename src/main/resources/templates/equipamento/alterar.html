@@ -10,29 +10,46 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 	<div layout:fragment="conteudo">
 		<div th:replace="~{layout/fragments/sidebar :: sidebar}"></div>
 
-		<!-- conteudo principal -->
 		<main class="mt-5 p-4 pt-5">
-			<h2>Alterar</h2>
-			<form th:action="@{/equipamento/alterar}" method="post" th:object="${equipamento}">
-				<div class="mb-3">
-					<label for="nome" class="form-label">
-						Código:
-						<span th:text="*{codigo}"></span>
-					</label>
-				</div>
-				<input type="hidden" name="codigo" th:value="*{codigo}">
-				<div class="mb-3">
-					<label for="nome" class="form-label">Nome</label>
-					<input type="text" class="form-control" th:field="*{nome}" placeholder="Digite o nome do equipamento" th:errorclass="is-invalid">
-					<span class="invalid-feedback" th:if="${#fields.hasErrors('nome')}" th:each="erro : ${#fields.errors('nome')}" th:text="${erro} + '. '"></span>
-				</div>
-				<div class="mb-3">
-					<label for="marca" class="form-label">Marca</label>
-					<input class="form-control" th:field="*{marca}" placeholder="Digite a marca da vacina" th:errorclass="is-invalid">
-					<span class="invalid-feedback" th:if="${#fields.hasErrors('marca')}" th:each="erro : ${#fields.errors('marca')}" th:text="${erro} + '. '"></span>
-				</div>
-				<button type="submit" class="btn btn-primary">Alterar</button>
-			</form>
+			<div class="container d-flex justify-content-center">
+				<div class="card card-raised mb-5 col-6">
+					<div class="card-body p-5">
+						<h3 class="card-title">Editar equipamento</h3>
+						<div class="card-subtitle mb-4">Preencha as novas informações do equipamento</div>
+
+						<form th:action="@{/equipamento/alterar}" method="post" th:object="${equipamento}">
+							<div class="col-6 mb-4">
+								<label for="nome" class="form-label">Código:
+									<span th:text="*{codigo}"></span>
+								</label>
+								<input type="hidden" name="codigo" th:value="*{codigo}">
+							</div>
+							<div class="row">
+								<div class="col-6 mb-4">
+									<label for="nome" class="form-label">Nome</label>
+									<input type="text" class="form-control" th:field="*{nome}" placeholder="Digite o nome do equipamento" th:errorclass="is-invalid">
+									<span class="invalid-feedback" th:if="${#fields.hasErrors('nome')}" th:each="erro : ${#fields.errors('nome')}" th:text="${erro} + '. '"></span>
+								</div>
+								<div class="col-6 mb-4">
+									<label for="marca" class="form-label">Marca</label>
+									<input class="form-control" th:field="*{marca}" placeholder="Digite a marca da vacina" th:errorclass="is-invalid">
+									<span class="invalid-feedback" th:if="${#fields.hasErrors('marca')}" th:each="erro : ${#fields.errors('marca')}" th:text="${erro} + '. '"></span>
+								</div>
+							</div>
+							<div class="col-12">
+							  <button type="submit" class="btn btn-primary">Salvar</button>
+							  <a th:href="@{/equipamento/abrirpesquisar}" class="btn btn-danger">Voltar</a>
+							</div>
+						  </form>
+
+						<div th:if="${notificacao != null}" th:object="${notificacao}">
+							<input type="hidden" id="mensagem" th:value="*{mensagem}">
+							<input type="hidden" id="tipo" th:value="*{tipo}">
+							<input type="hidden" id="intervalo" th:value="*{intervalo}">
+						</div>
+					</div>
+				</div>	
+			</div>
 		</main>
 	</div>
 </body>
